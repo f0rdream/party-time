@@ -37,7 +37,17 @@ class UserCreateSerializer(ModelSerializer):
         email = data.get('email')
         user_queryset = User.objects.filter(email=email)
         if user_queryset.exists():
-            raise ValidationError("This email has been register.")
+            raise ValidationError("This email has been registered.")
+        return value
+
+    def validate_username(self, value):
+        data = self.get_initial()
+        username = data.get('username')
+        if len(username) < 9:
+            raise ValidationError("The username must be more than 9 digits.")
+        user_qs = User.objects.filter(username=username)
+        if user_qs.exists():
+            raise ValidationError("The username has been registered.")
         return value
 
     def create(self, validated_data):
