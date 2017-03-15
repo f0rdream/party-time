@@ -1,5 +1,6 @@
 from channels.routing import route
-from juhui.consumers import ws_connect,ws_message,ws_disconnect
+from .consumers import ws_connect, ws_message, ws_disconnect
+
 channel_routing =[
     route("websocket.connect", ws_connect),
     route("websocket.receive", ws_message),

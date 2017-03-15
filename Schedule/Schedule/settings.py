@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'accounts',
     'groupagenda',
+    'websocket_message',
+    'channels',
 ]
 
 MIDDLEWARE = [

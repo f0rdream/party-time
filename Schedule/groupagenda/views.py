@@ -107,7 +107,7 @@ class AgendaRefreshAPIView(APIView):
             pre_agenda = Agenda.objects.filter(pk=pre_agenda.pk).update(has_pass=True)
         serializer = AgendaRefreshSerializer(pre_agenda)
         agenda = self.get_object(group_id, pk)
-        if agenda.has_pass == True:
+        if agenda.has_pass:
             serializer = AgendaDetailSerializer(agenda)
         return Response(serializer.data, status=HTTP_200_OK)
 

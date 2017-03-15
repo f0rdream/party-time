@@ -1,3 +1,4 @@
+channels
 curl==2017.0.1
 Django==1.10.5
 djangorestframework==3.5.3

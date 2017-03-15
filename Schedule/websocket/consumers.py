@@ -1,9 +1,9 @@
 #coding:UTF-8
 from channels import Group
 from channels.auth import channel_session_user_from_http,channel_session,channel_session_user
-from .models import Notice,Membership
+from websocket_message.models import Notice,Membership
 import json
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.contrib.auth.models import Group as DGroup #为了跟Channels的Group区别
 #连接到websocket.connect
 

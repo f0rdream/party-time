@@ -3,11 +3,11 @@ from .views import (GroupListAPIView,
                     GroupCreateAPIView,
                     AgendaListAPIView,
                     AgendaDetailAPIView,
-                    AgendaCreateAPIView,
                     AgendaPostAPIView,
                     agenda_create,
                     AgendaRefreshAPIView,
                     NumberInGroupAPIView)
+                    # AgendaCreateAPIView,
 
 urlpatterns = [
     url(r'^group/$', GroupListAPIView.as_view(), name="group_list"),

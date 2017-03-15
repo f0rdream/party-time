@@ -1,4 +1,3 @@
-# from django.shortcuts import render
 from .serializers import TaskListSerializer,TaskDetailSerializer,TaskCreateUpdateSerializer
 from rest_framework.generics import (
     ListAPIView,
@@ -7,16 +6,17 @@ from rest_framework.generics import (
     CreateAPIView,
     RetrieveUpdateAPIView
 )
-from .models import Task
 from rest_framework.permissions import (
     IsAdminUser,
     IsAuthenticated,
     AllowAny,
     IsAuthenticatedOrReadOnly
 )
+from .models import Task
 from .permissions import MyIsAuthenticated
-from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.authentication import SessionAuthentication
+# from django.shortcuts import render
+# from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 # Create your views here.
 
 
@@ -24,18 +24,10 @@ class TaskListAPIView(ListAPIView):
     serializer_class = TaskListSerializer
     permission_classes = [IsAuthenticated]
     lookup_field = 'title'
-    # authentication_classes = [JSONWebTokenAuthentication]
+
     def get_queryset(self, *args, **kwargs):
         queryset = Task.objects.filter(user=self.request.user)
         return queryset
-
-    # def get_queryset(self, *args, **kwargs):
-    #     user = self.request.user
-    #     username = user.username
-    #     user_obj = User.objects.filter(username="qwert")
-    #     # user_obj = User.objects.filter(username=username)
-    #     queryset = Task.objects.filter(user=user_obj)
-    #     return queryset
 
 
 class TaskDetailAPIView(RetrieveAPIView):
