@@ -6,6 +6,7 @@ import router from './router'
 import VueResource from 'vue-resource'
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
+import baseUrl from './config/env'
 
 Vue.config.productionTip = false
 Vue.use(VueResource)
@@ -16,5 +17,8 @@ new Vue({
   el: '#app',
   router,
   template: '<App/>',
-  components: { App }
+  components: { App },
+  http: {
+    root: baseUrl
+  }
 })
