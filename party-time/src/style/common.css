@@ -1,6 +1,8 @@
 html, body {
   margin: 0;
   padding: 0;
+}
+body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif, 'PingFang SC', 'Noto Sans CJK', 'Microsoft YaHei';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
