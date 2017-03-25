@@ -16,10 +16,6 @@ a {
   text-decoration: none;
 }
 
-#app {
-  font-size: 16px;
-}
-
 .clear::after {
   content: "";
   display: block;
