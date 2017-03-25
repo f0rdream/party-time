@@ -3,15 +3,16 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import VueResource from 'vue-resource'
 import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import './style/common.css'
-import baseUrl from './config/env'
+import './config/resource'
+import VueCookie from 'vue-cookie'
 
 Vue.config.productionTip = false
-Vue.use(VueResource)
+
 Vue.use(Mint)
+Vue.use(VueCookie)
 
 /* eslint-disable no-new */
 new Vue({
@@ -19,9 +20,4 @@ new Vue({
   router,
   template: '<App/>',
   components: { App }
-  // http: {
-  //   root: '//125.01.01.0'
-  // }
 })
-
-Vue.http.options.root = baseUrl.baseUrl

@@ -6,6 +6,4 @@ if (process.env.NODE_ENV === 'development') {
   baseUrl = '//api.skyparade.org'
 }
 
-export default {
-  baseUrl
-}
+export default baseUrl

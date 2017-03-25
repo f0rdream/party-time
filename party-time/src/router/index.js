@@ -5,6 +5,7 @@ import Hello from '@/components/Hello'
 import home from '@/page/home'
 import group from '@/page/group'
 import login from '@/page/login'
+import person from '@/page/person'
 
 Vue.use(Router)
 
@@ -29,6 +30,10 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: login
+    },
+    {
+      path: '/person',
+      component: person
     }
   ]
 })

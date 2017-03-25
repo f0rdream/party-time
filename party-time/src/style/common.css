@@ -2,12 +2,23 @@ html, body {
   margin: 0;
   padding: 0;
 }
+html {
+  font-size: 62.5%;
+}
 body {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif, 'PingFang SC', 'Noto Sans CJK', 'Microsoft YaHei';
+  font-family: 'Avenir', Helvetica, Arial, sans-serif, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+a {
+  background-color: transparent;
+  text-decoration: none;
+}
+
+#app {
+  font-size: 16px;
+}
 
 .clear::after {
   content: "";
