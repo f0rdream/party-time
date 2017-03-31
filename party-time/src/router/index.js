@@ -6,10 +6,12 @@ import home from '@/page/home'
 import group from '@/page/group'
 import login from '@/page/login'
 import person from '@/page/person'
+import register from '@/page/register'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -30,6 +32,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: login
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: register
     },
     {
       path: '/person',

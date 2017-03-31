@@ -16,6 +16,6 @@ export default {
 
 <style>
 #app {
-  font-size: 16px;
+  font-size: 1.6rem;
 }
 </style>

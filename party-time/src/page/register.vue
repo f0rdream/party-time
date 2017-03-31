@@ -1,50 +1,62 @@
 <template>
   <div>
-    <mt-header fixed title="注册">
+    <mt-header title="注册">
       <mt-button @click="$router.go(-1)" slot="left" icon="back"></mt-button>
     </mt-header>
-    <section>
+    <section class="page-part">
       <mt-field label="用户名" placeholder="请输入用户名" v-model="form.username"></mt-field>
-      <mt-field label="密码" placeholder="请输入密码" v-model="form.password"></mt-field>
-      <mt-button type="primary" @click.native="login">登录</mt-button>
-      <mt-switch v-model="remembered">记住登录状态</mt-switch>
+      <mt-field label="密码" placeholder="请输入密码" v-model="form.password" type="password"></mt-field>
+      <mt-field label="密码" placeholder="确认密码" type="password"></mt-field>
+    </section>
+    <section class="page-part">
+      <mt-field label="真实姓名" placeholder="方便您的朋友找到您" v-model="form.realname"></mt-field>
+      <mt-field label="手机" placeholder="请输入您的手机号" type="tel" v-model="form.phone"></mt-field>
+      <mt-field label="邮箱" placeholder="请输入您的邮箱" type="email" v-model="form.email"></mt-field>
+      <mt-field label="学号" placeholder="请输入您的学号" v-model="form.user_stu_id"></mt-field>
+    </section>
+    <section class="page-part middle-box">
+      <mt-button type="primary" @click.native="register" class="btn-large">立即注册</mt-button>
+      <router-link to="login" class="text-info">已有账号？点击登录</router-link>
     </section>
   </div>
 </template>
 
 <script>
-import Router from '../router'
 
 export default {
   data () {
     return {
-      remembered: true,
       form: {
         username: '',
-        password: ''
-      }
+        password: '',
+        realname: '',
+        phone: '',
+        email: '',
+        user_stu_id: ''
+      },
+      wait: false
     }
   },
   methods: {
-    login () {
-      this.$http.post('auth/token/', this.form).then(res => {
-        if (remembered) {
-          this.$cookie.set('token', res.token, 30)
-          this.$cookie.set('username', this.form.username, 30)
-        } else {
-          this.$cookie.set('token', res.token, -1)
-          this.$cookie.set('username', this.form.username, -1)
-        }
-        window.console.log('login successfully')
-        Router.go(-1)
+    register () {
+      this.wait = true
+      this.$http.post('accounts/register/', this.form).then(res => {
+        window.console.log('It\'s OK:' + res.body)
+        this.wait = false
       }, res => {
-        window.console.log(res.body)
+        window.console.log('Error happend:' + res.body)
+        this.wait = false
       })
-    },
-    init ()
+    }
   }
 
 }
 </script>
 <style scoped>
+.middle-box {
+  margin-top: 1.5rem;
+}
+.text-info {
+  margin-top: 1rem;
+}
 </style>

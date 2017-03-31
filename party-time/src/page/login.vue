@@ -10,10 +10,10 @@
     </section>
     <section class="main-part">
       <mt-field label="用户名" placeholder="请输入用户名" v-model="form.username"></mt-field>
-      <mt-field label="密码" placeholder="请输入密码" v-model="form.password"></mt-field>
+      <mt-field label="密码" placeholder="请输入密码" v-model="form.password" type="password"></mt-field>
       <div class="cell-box">
         <check-box checkValue="lala" label="记住登录"></check-box>
-        <router-link to="/forgotten" >忘记密码</router-link>
+        <router-link to="/forgotten" class="">忘记密码</router-link>
       </div>
       <mt-button type="primary" @click.native="login">登录</mt-button>
     </section>
@@ -41,8 +41,9 @@ export default {
   methods: {
     login () {
       this.$http.post('auth/token/', this.form).then(res => {
+        window.console.log(res.data.token)
         if (this.remembered) {
-          this.$cookie.set('token', res.token, 30)
+          this.$cookie.set('token', res.data.token, 30)
           this.$cookie.set('username', this.form.username, 30)
         } else {
           this.$cookie.set('token', res.token, -1)

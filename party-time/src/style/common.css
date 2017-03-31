@@ -27,3 +27,19 @@ a {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+
+.btn-large {
+  height: 4rem;
+  width: 24rem;
+}
+
+.text-info {
+  font-size: 1.2rem;
+}
+
+.middle-box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

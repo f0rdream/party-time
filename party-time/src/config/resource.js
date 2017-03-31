@@ -14,6 +14,7 @@ function clean (obj) {
     }
   }
 }
+
 // emlulate json if the server don't suppot json
 // Vue.http.options.emulateJSON = true
 
