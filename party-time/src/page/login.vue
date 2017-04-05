@@ -12,7 +12,7 @@
       <mt-field label="用户名" placeholder="请输入用户名" v-model="form.username"></mt-field>
       <mt-field label="密码" placeholder="请输入密码" v-model="form.password" type="password"></mt-field>
       <div class="cell-box">
-        <check-box checkValue="lala" label="记住登录"></check-box>
+        <check-box checkValue="remembered" label="记住登录" v-model="form.remembered"></check-box>
         <router-link to="/forgotten" class="">忘记密码</router-link>
       </div>
       <mt-button type="primary" @click.native="login">登录</mt-button>
@@ -21,54 +21,55 @@
 </template>
 
 <script>
-import Router from '../router'
-import CheckBox from '../components/common/CheckBox'
+  import { Indicator, Toast } from 'mint-ui'
+  import Router from '../router'
+  import CheckBox from '../components/common/CheckBox'
+  import { setMap } from '../config/store'
 
-export default {
-  components: {
-    CheckBox
-  },
-  data () {
-    return {
-      value: [''],
-      remembered: true,
-      form: {
-        username: '',
-        password: ''
+  export default {
+    components: {
+      CheckBox
+    },
+    data () {
+      return {
+        form: {
+          username: '',
+          password: '',
+          remembered: true
+        }
+      }
+    },
+    methods: {
+      login () {
+        Indicator.open('正在登陆...')
+        this.$http.post('auth/token/', this.form).then(res => {
+          Indicator.close()
+          setMap('isLogin', true)
+          Router.go(-1)
+        }, res => {
+          Indicator.close()
+          Toast({
+            message: '登陆失败',
+            position: 'bottom',
+            duration: 5000
+          })
+          window.console.log(res)
+        })
       }
     }
-  },
-  methods: {
-    login () {
-      this.$http.post('auth/token/', this.form).then(res => {
-        window.console.log(res.data.token)
-        if (this.remembered) {
-          this.$cookie.set('token', res.data.token, 30)
-          this.$cookie.set('username', this.form.username, 30)
-        } else {
-          this.$cookie.set('token', res.token, -1)
-          this.$cookie.set('username', this.form.username, -1)
-        }
-        window.console.log('login successfully')
-        Router.go(-1)
-      }, res => {
-        window.console.log(res.body)
-      })
-    }
-  }
 
-}
+  }
 </script>
 <style scoped>
-.icon-part {
-  display: flex;
-  height: 30rem;
-}
-.icon-box {
-  margin: auto;
-}
-.icon-box img {
-  width: 10rem;
-  height: 10rem;
-}
+  .icon-part {
+    display: flex;
+    height: 30rem;
+  }
+  .icon-box {
+    margin: auto;
+  }
+  .icon-box img {
+    width: 10rem;
+    height: 10rem;
+  }
 </style>

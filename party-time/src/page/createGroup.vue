@@ -5,7 +5,7 @@
 
     </mt-header>
     <section>
-      <mt-field label="群名称"  v-model="groupName" class="groupname"></mt-field>
+      <mt-field label="群名称"  v-model="groupName" class="group-name"></mt-field>
     </section>
     <section>
       <mt-button type="primary" @click.native="create" class="button">创建</mt-button>
@@ -15,7 +15,6 @@
 </template>
 
 <script>
-  import { Toast } from 'mint-ui'
   export default {
     data () {
       return {
@@ -27,7 +26,7 @@
         console.log(this.groupName)
         this.$http.post('groupagenda/group/create/', {'group name': this.groupName}).then(res => {
           if (res.name) {
-            Toast('你已经创建群组' + res.name)
+            this.Toast('你已经创建群组' + res.name)
           }
         })
       }
@@ -41,7 +40,7 @@
     margin-top:40px;
 
   }
-  .groupname{
+  .group-name{
     padding-top:40px;
   }
   .button{

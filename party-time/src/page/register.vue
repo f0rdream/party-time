@@ -23,40 +23,40 @@
 
 <script>
 
-export default {
-  data () {
-    return {
-      form: {
-        username: '',
-        password: '',
-        realname: '',
-        phone: '',
-        email: '',
-        user_stu_id: ''
-      },
-      wait: false
+  export default {
+    data () {
+      return {
+        form: {
+          username: '',
+          password: '',
+          realname: '',
+          phone: '',
+          email: '',
+          user_stu_id: ''
+        },
+        wait: false
+      }
+    },
+    methods: {
+      register () {
+        this.wait = true
+        this.$http.post('accounts/register/', this.form).then(res => {
+          window.console.log('It\'s OK:' + res.body)
+          this.wait = false
+        }, res => {
+          window.console.log('Error happend:' + res.body)
+          this.wait = false
+        })
+      }
     }
-  },
-  methods: {
-    register () {
-      this.wait = true
-      this.$http.post('accounts/register/', this.form).then(res => {
-        window.console.log('It\'s OK:' + res.body)
-        this.wait = false
-      }, res => {
-        window.console.log('Error happend:' + res.body)
-        this.wait = false
-      })
-    }
-  }
 
-}
+  }
 </script>
 <style scoped>
-.middle-box {
-  margin-top: 1.5rem;
-}
-.text-info {
-  margin-top: 1rem;
-}
+  .middle-box {
+    margin-top: 1.5rem;
+  }
+  .text-info {
+    margin-top: 1rem;
+  }
 </style>

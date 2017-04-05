@@ -25,7 +25,6 @@ Vue.http.interceptors.push({
     clean(ret.params)
     return ret
   },
-
   response: (response) => {
     let res = Object.assign({}, response)
     if (res.ok) {

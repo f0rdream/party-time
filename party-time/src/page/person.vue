@@ -20,37 +20,37 @@
 
 <script>
 
-export default {
-  data () {
-    return {
-      username: '',
-      account: '',
-      name: '',
-      description: ''
-    }
-  },
-  mounted () {
-    this.initData()
-  },
-  methods: {
-    initData () {
-      this.$http.get('/accounts/<user_stu_id>/')
+  export default {
+    data () {
+      return {
+        username: '',
+        account: '',
+        name: '',
+        description: ''
+      }
+    },
+    mounted () {
+      this.initData()
+    },
+    methods: {
+      initData () {
+        this.$http.get('/accounts/<user_stu_id>/')
+      }
     }
   }
-}
 
 </script>
 
 <style scoped>
-.icon-part {
-  display: flex;
-  height: 30rem;
-}
-.icon-box {
-  margin: auto;
-}
-.icon-box img {
-  width: 10rem;
-  height: 10rem;
-}
+  .icon-part {
+    display: flex;
+    height: 30rem;
+  }
+  .icon-box {
+    margin: auto;
+  }
+  .icon-box img {
+    width: 10rem;
+    height: 10rem;
+  }
 </style>
