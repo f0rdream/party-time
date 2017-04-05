@@ -24,7 +24,6 @@
     data () {
       return {
         username: '',
-        account: '',
         name: '',
         description: ''
       }
@@ -34,7 +33,7 @@
     },
     methods: {
       initData () {
-        this.$http.get('/accounts/<user_stu_id>/')
+        this.$http.get('/accounts/')
       }
     }
   }

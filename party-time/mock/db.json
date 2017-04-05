@@ -1,0 +1,12 @@
+{
+  "isLogin": {
+    "isLogin": true
+  },
+  "accounts": {
+    "username": "yzy",
+    "email": "",
+    "user_stu_id": 123456789,
+    "school": "safdfsa",
+    "phoneNum": 13016464640
+  }
+}

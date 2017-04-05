@@ -16,6 +16,7 @@
     methods: {
       isLogin () {
         this.$http.get('isLogin').then(res => {
+          console.log(res)
           if (res.data) {
             setMap('isLogin', true)
           } else {
