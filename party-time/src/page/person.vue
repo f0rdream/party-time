@@ -2,7 +2,7 @@
   <div>
     <mt-header fixed title="个人信息">
       <mt-button @click="$router.go(-1)" slot="left" icon="back"></mt-button>
-      <mt-button icon="more" slot="right"></mt-button>
+      <mt-button slot="right" @click="editDone"><span>{{ editable ? '完成' : '编辑'}}</span></mt-button>
     </mt-header>
     <section class="icon-part">
       <div class="icon-box">
@@ -10,22 +10,30 @@
       </div>
     </section>
     <section class="main-part">
-      <mt-field label="用户名" value="fordream" readonly v-model="username"></mt-field>
-      <mt-field label="账号" value="fordream" readonly v-model="account"></mt-field>
-      <mt-field label="真实姓名" value="fordream" readonly v-model="name"></mt-field>
-      <mt-field label="自我介绍" type="textarea" rows="4" readonly v-model="description"></mt-field>
+      <mt-field label="用户名" :readonly="!editable" v-model="form.username"></mt-field>
+      <mt-field label="真实姓名" :readonly="!editable" v-model="form.realname"></mt-field>
+      <mt-field label="手机" :readonly="!editable" v-model="form.phone"></mt-field>
+      <mt-field label="邮箱" :readonly="!editable" v-model="form.email"></mt-field>
+      <mt-field label="学号" :readonly="!editable" v-model="form.stuId"></mt-field>
+      <mt-field label="自我介绍" type="textarea" :readonly="!editable" rows="4" v-model="form.description"></mt-field>
     </section>
   </div>
 </template>
 
 <script>
-
+  import { Toast } from 'mint-ui'
   export default {
     data () {
       return {
-        username: '',
-        name: '',
-        description: ''
+        editable: false,
+        form: {
+          username: '',
+          realname: '',
+          phone: '',
+          email: '',
+          stuId: '',
+          description: ''
+        }
       }
     },
     mounted () {
@@ -33,7 +41,35 @@
     },
     methods: {
       initData () {
-        this.$http.get('/accounts/')
+        this.$http.get('/accounts/').then(res => {
+          this.form.username = res.body.username
+          this.form.realname = res.body.realname
+          this.form.phone = res.body.phone
+          this.form.email = res.body.email
+          this.form.stuId = res.body.user_stu_id
+          this.form.description = res.body.description
+        }, res => {
+        })
+      },
+      editDone () {
+        if (!this.editable) {
+          this.editable = true
+        } else {
+          this.$http.post('/accounts/', this.form).then(res => {
+            Toast({
+              message: '更新成功',
+              position: 'bottom',
+              duration: 1500
+            })
+            this.editable = false
+          }, res => {
+            Toast({
+              message: '更新失败',
+              position: 'bottom',
+              duration: 1500
+            })
+          })
+        }
       }
     }
   }

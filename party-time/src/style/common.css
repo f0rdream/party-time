@@ -28,7 +28,7 @@ a {
   white-space: nowrap;
 }
 
-
+/*From Wang Yang*/
 .btn-large {
   height: 4rem;
   width: 24rem;
@@ -43,3 +43,5 @@ a {
   align-items: center;
   flex-direction: column;
 }
+
+

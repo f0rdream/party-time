@@ -51,7 +51,7 @@
           Toast({
             message: '登陆失败',
             position: 'bottom',
-            duration: 5000
+            duration: 2000
           })
           window.console.log(res)
         })
