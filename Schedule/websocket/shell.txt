@@ -1,0 +1,10 @@
+from juhui.models import *
+from django.contrib.auth.models import User
+all_notice = Notice.objects.all()
+all_notice.count()
+notice = Notice.objects.get(id=8)
+user = User.objects.get(username='5678')
+membership=Membership.objects.get(notice=notice,user=user)
+membership.save()
+for m in user.membership_set.filter(is_send=False):
+    print(m.notice.time,m.notice.sender,m.notice.groupname)

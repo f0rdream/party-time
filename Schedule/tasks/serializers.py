@@ -1,14 +1,10 @@
-from django.urls import reverse_lazy
-
 from .models import Task
-from django.contrib.auth.models import User
 from rest_framework.serializers import (
     ModelSerializer,
     HyperlinkedIdentityField,
     SerializerMethodField
 )
 from django.utils import timezone
-from accounts.serializers import UserProfileDetailSerializer
 task_detail_url = HyperlinkedIdentityField(
         view_name='tasks:detail',
         lookup_field='title'
@@ -23,6 +19,7 @@ class TaskListSerializer(ModelSerializer):
     )
     user = SerializerMethodField()
     is_past = SerializerMethodField()
+
     class Meta:
         model = Task
         fields = [
@@ -75,7 +72,6 @@ class TaskDetailSerializer(ModelSerializer):
             return False
         elif now > obj.end_time:
             return True
-
 
 
 class TaskCreateUpdateSerializer(ModelSerializer):
