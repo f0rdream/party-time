@@ -7,8 +7,8 @@ import group from '@/page/group'
 import login from '@/page/login'
 import person from '@/page/person'
 import register from '@/page/register'
-import addSche from '@/page/addSche'
-import createGroup from '@/page/createGroup'
+import addsche from '@/page/addsche'
+import creategroup from '@/page/creategroup'
 
 Vue.use(Router)
 
@@ -45,12 +45,12 @@ export default new Router({
       component: person
     },
     {
-      path: '/addSche',
-      component: addSche
+      path: '/addsche',
+      component: addsche
     },
     {
-      path: '/createGroup',
-      component: createGroup
+      path: '/creategroup',
+      component: creategroup
     }
 
   ]
