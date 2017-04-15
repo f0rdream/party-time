@@ -1,0 +1,47 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.clear::after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+}
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*From Wang Yang*/
+.btn-large {
+  height: 4rem;
+  width: 24rem;
+}
+
+.text-info {
+  font-size: 1.2rem;
+}
+
+.middle-box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+
