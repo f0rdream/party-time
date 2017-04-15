@@ -1,13 +1,28 @@
 import datetime
+import time
 from django.contrib.auth.models import User
 from tasks.models import Task
 from django.utils.timezone import datetime as dt
 
-def get_count(obj, hour,day):
+
+def get_count(obj, hour, day):
     group_name = obj.name
     users = User.objects.filter(groups__name=group_name)
-    day = datetime.date.today()+datetime.timedelta(days=day)
-    print day
+    date = datetime.date.today()+datetime.timedelta(days=day)
+    number = count(users, hour, date)
+    return number
+
+
+def get_count_for_date(obj, hour, date):
+    group_name = obj.name
+    users = User.objects.filter(groups__name=group_name)
+    date = datetime.datetime.strptime(date, "%Y-%m-%d").date()
+    print date
+    number = count(users, hour, date)
+    return number
+
+
+def count(users, hour, day):
     count = 0
     start_time = datetime.time(second=0, hour=hour, minute=0)
     end_time = datetime.time(hour=hour+2, minute=0, second=0)
@@ -23,4 +38,3 @@ def get_count(obj, hour,day):
         print tasks_end
         count += tasks_start.count() + tasks_end.count()
     return count
-

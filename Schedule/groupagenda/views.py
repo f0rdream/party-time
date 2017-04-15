@@ -1,4 +1,6 @@
 import json
+
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q, F
 from django.http import Http404
 from rest_framework.decorators import api_view
@@ -6,7 +8,7 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
 from rest_framework.status import HTTP_201_CREATED, HTTP_400_BAD_REQUEST, HTTP_200_OK
 from rest_framework.views import APIView
-
+from .utils import get_count_for_date
 from .models import Agenda, GroupProfile
 from .serializers import (AgendaListSerializer,
                           AgendaDetailSerializer,
@@ -252,3 +254,25 @@ class NumberInGroupAPIView(RetrieveAPIView):
     permission_classes = [IsAuthenticated]
     lookup_field = "id"
     queryset = Group.objects.all()
+
+@login_required
+@api_view(['GET'])
+def number_in_group(request, group_id, date):
+    user = request.user
+    try:
+        group = Group.objects.get(id=group_id)
+    except Group.DoesNotExist:
+        raise Http404
+    day_dict = {
+        'name': group.name,
+        date: {
+            '8:00-10:00': get_count_for_date(obj=group, hour=8, date=date),
+            '10:00-12:00': get_count_for_date(obj=group, hour=12, date=date),
+            '14:00-16:00': get_count_for_date(obj=group, hour=14, date=date),
+            '16:00-18:00': get_count_for_date(obj=group, hour=16, date=date),
+            '18:00-20:00': get_count_for_date(obj=group, hour=18, date=date),
+            '20:00-22:00': get_count_for_date(obj=group, hour=20, date=date),
+        }
+    }
+    return Response(day_dict, status=HTTP_200_OK)
+
