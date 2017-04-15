@@ -32,10 +32,12 @@
 </template>
 
 <script>
+  import { getMap } from '../config/store'
   import { Toast } from 'mint-ui'
   export default {
     data () {
       return {
+        group_id: '',
         pickerstart: new Date(),
         pickerend: new Date(),
         selected: '1',
@@ -59,7 +61,7 @@
           '-' + (this.pickerend.getDate() < 10 ? '0' + this.pickerend.getDate() : this.pickerend.getDate()) + 'T' +
           (this.pickerend.getHours() < 10 ? '0' + this.pickerend.getHours() : this.pickerend.getHours()) + ':' +
           (this.pickerend.getMinutes() < 10 ? '0' + this.pickerend.getMinutes() : this.pickerend.getMinutes()) + ':00Z'
-        this.$http.post('/group-agenda/group_id/post2', this.affair).then(res => {
+        this.$http.post('/group-agenda/' + this.group_id + '/post2', this.affair).then(res => {
           if (res.title) {
             Toast('你已经创建任务' + res.title)
           }
@@ -92,20 +94,13 @@
           '-' + (this.pickerend.getDate() < 10 ? '0' + this.pickerend.getDate() : this.pickerend.getDate()) + '-' +
           (this.pickerend.getHours() < 10 ? '0' + this.pickerend.getHours() : this.pickerend.getHours()) + '-' +
           (this.pickerend.getMinutes() < 10 ? '0' + this.pickerend.getMinutes() : this.pickerend.getMinutes())
+      },
+      group_id: function () {
+        return getMap('group_id')
       }
     }
   }
 </script>
 <style scoped>
-  .icon-part {
-    display: flex;
-    height: 30rem;
-  }
-  .icon-box {
-    margin: auto;
-  }
-  .icon-box img {
-    width: 10rem;
-    height: 10rem;
-  }
+
 </style>
