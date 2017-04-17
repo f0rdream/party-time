@@ -8,7 +8,7 @@
       <mt-field label="群名称"  v-model="groupName" class="group-name"></mt-field>
     </section>
     <section>
-      <mt-button type="primary" @click.native="create" class="button">创建</mt-button>
+      <mt-button type="primary" @click.native="create" class="btn-large">创建</mt-button>
     </section>
 
   </div>
@@ -43,7 +43,7 @@
   .group-name{
     padding-top:40px;
   }
-  .button{
+  .btn-large{
     display: block;
     margin: 20px auto 0 auto;
   }
