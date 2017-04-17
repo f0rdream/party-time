@@ -1,9 +1,9 @@
 <template>
   <div>
-    <mt-header fixed title="日程添加" class="header">
+    <mt-header  title="日程添加" class="header">
       <mt-button @click="$router.go(-1)" slot="left" icon="back"></mt-button>
     </mt-header>
-    <section class="main">
+    <section class="main-part">
       <mt-navbar v-model="selected" class="outer">
         <div class="flex">
         <mt-tab-item id="1" class="change" >导入课表</mt-tab-item>
@@ -15,8 +15,8 @@
             <mt-field label="系统账号" placeholder="请输入系统账号"></mt-field>
             <mt-field label="登录密码" placeholder="请输入登录密码"></mt-field>
             </section>
-            <section class="button_section">
-            <mt-button type="default">登录</mt-button>
+            <section class="button-section">
+            <mt-button type="default" class="btn-large">登录</mt-button>
             </section>
           </mt-tab-container-item>
           <mt-tab-container-item id="2">
@@ -27,8 +27,8 @@
               <mt-field label="结束时间" placeholder="请输入结束时间" v-model="showEnd" @click.native="showPickerEnd"></mt-field>
             </section>
 
-            <section class="button_section">
-            <mt-button type="default" @click="submit">确认</mt-button>
+            <section class="button-section">
+            <mt-button type="default" @click="submit" class="btn-large">确认</mt-button>
             </section>
             <section>
               <mt-datetime-picker
@@ -119,16 +119,21 @@
   }
 </script>
 <style>
-.main{
-  margin-top:40px;
-}
+
 .outer{
   flex-direction:column;
 }
 .flex{
   display: flex;
 }
-.button_section{
-   margin-top:20px;
+.button-section{
+   padding-top:2rem;
+  background: rgb(232,232,232);
 }
+.main-part {
+  margin-top:4rem;
+  background: rgb(232,232,232)
+}
+
+
 </style>
