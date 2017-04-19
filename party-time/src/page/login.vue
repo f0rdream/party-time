@@ -15,7 +15,7 @@
         <check-box checkValue="remembered" label="记住登录" v-model="form.remembered"></check-box>
         <router-link to="/forgotten" class="">忘记密码</router-link>
       </div>
-      <mt-button type="primary" @click.native="login">登录</mt-button>
+      <mt-button type="primary" @click.native="login" class="btn-large">登录</mt-button>
     </section>
   </div>
 </template>

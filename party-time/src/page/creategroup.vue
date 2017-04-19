@@ -35,9 +35,6 @@
 </script>
 
 <style scoped>
-  
-  .btn-large{
-    display: block;
-    margin: 20px auto 0 auto;
-  }
+
+
 </style>
