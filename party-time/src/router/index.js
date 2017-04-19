@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Hello from '@/components/Hello'
-import home from '@/page/home'
+import sche from '@/page/sche'
 import group from '@/page/group'
 import login from '@/page/login'
 import person from '@/page/person'
@@ -27,9 +27,9 @@ export default new Router({
       component: group
     },
     {
-      path: '/home',
-      name: 'home',
-      component: home
+      path: '/sche',
+      name: 'sche',
+      component: sche
     },
     {
       path: '/login',
@@ -43,22 +43,27 @@ export default new Router({
     },
     {
       path: '/person',
+      name: 'person',
       component: person
     },
     {
       path: '/addsche',
+      name: 'addsche',
       component: addsche
     },
     {
       path: '/creategroup',
+      name: 'creategroup',
       component: creategroup
     },
     {
       path: '/creategroupsche',
+      name: 'creategroupsche',
       component: creategroupsche
     },
     {
       path: '/mygroup',
+      name: 'mygroup',
       component: mygroup
     }
 
