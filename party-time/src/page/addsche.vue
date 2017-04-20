@@ -118,7 +118,7 @@
     }
   }
 </script>
-<style>
+<style scoped>
 
 .outer{
   flex-direction:column;

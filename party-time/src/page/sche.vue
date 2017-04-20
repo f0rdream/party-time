@@ -1,43 +1,38 @@
 <template>
   <div class="app-wrapper">
     <mt-header title="第4周" class="header">
-      <mt-button @click="$router.push('person')" slot="left" icon="back"></mt-button>
-      <mt-button icon="more" slot="right"></mt-button>
+      <mt-button @click="$router.push('mygroup')" slot="left" icon="back"></mt-button>
+      <mt-button icon="more" slot="right" @click="$router.push('groupmessage')"></mt-button>
     </mt-header>
     <section class="main-part">
       <div class="col-day col-time">
         <div class="tbl-label"></div>
-        <div v-for="(value , time) in response.first_day" class="tbl-cell">
+        <div v-for="time in timeData" class="tbl-cell">
           <span class="tbl-time">{{time.split('-')[0]}}</span>
           <span class="tbl-time" v-if="time==='20:00-22:00'">{{time.split('-')[1]}}</span>
         </div>
       </div>
-      <div class="col-day" v-for="(day, key, index) in response">
+      <div class="col-day" v-for="(day, key, index) in responseData">
         <div class="tbl-label">{{dayLabel[index]}}</div>
         <div v-for="time in day" :style="getStyle(time)" class="day-cell">
           {{time}}
         </div>
       </div>
     </section>
-    <tab-bar></tab-bar>
   </div>
 </template>
 
 <script>
   import { getMap } from '../config/store'
   import { Toast } from 'mint-ui'
-  import TabBar from '@/components/TabBar'
 
   export default {
-    components: {
-      TabBar
-    },
     data () {
       return {
         groupId: '',
-        timeData: ['6:00-8:00', '8:00-10:00', '10:00-12:00', '12:00-14:00', '14:00-16:00', '16:00-18:00', '18:00-20:00', '20:00-22:00'],
-        dayLabel: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
-        response: {
+//        timeData: ['6:00-8:00', '8:00-10:00', '10:00-12:00', '12:00-14:00', '14:00-16:00', '16:00-18:00', '18:00-20:00', '20:00-22:00'],
+//        dayLabel: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+        responseData: {
           'first_day': {
             '6:00-8:00': 0,
             '8:00-10:00': 0,
@@ -108,33 +103,60 @@
             '18:00-20:00': 0,
             '20:00-22:00': 0
           }
-        }
+        }           /* Add default responseData data in case get failed */
       }
     },
-    methods: {
-      init () {
+    mounted () {
+      this.init()
+    },
+    computed: {
+      timeData: function () {
+        let timeData = []
+        for (let time in this.responseData.first_day) {
+          if (this.responseData.first_day.hasOwnProperty(time)) {
+            timeData.push(time)
+          }
+        }
+        return timeData
+      },
+      dayLabel: function () {
         let now = new Date()
         let nowYear = now.getFullYear()
         let nowMonth = now.getMonth()
         let nowDate = now.getDate()
-        this.groupId = getMap('groupId')
-        this.$http.get(`group-agenda/${this.groupId}/number/`).then(res => {
-          delete res.body.name
-          this.response = res.body
-          let count = 0
-          for (let day in res.body) {
-            this.dayLabel.push(new Date(`${nowYear}-${nowMonth}-${nowDate + count}`))
-            for (let time in day) {
-              this.timeData.push(time)
-            }
+        let count = 0
+        let dayLabel = []
+        for (let day in this.responseData) {
+          if (this.responseData.hasOwnProperty(day)) {
+            let day = new Date(`${nowYear}-${nowMonth}-${nowDate + count}`)
+            dayLabel.push(day.getMonth() + '-' + day.getDate())
           }
-        }, res => {
+          count++
+        }
+        return dayLabel
+      }
+    },
+    methods: {
+      init () {
+        this.groupId = getMap('groupId')
+        if (this.groupId) {
+          this.$http.get(`group-agenda/${this.groupId}/number/`).then(res => {
+            delete res.body.name
+            this.responseData = res.body
+          }, res => {
+            Toast({
+              message: '获取信息失败',
+              position: 'bottom',
+              duration: 2000
+            })
+          })
+        } else {
           Toast({
-            message: '获取信息失败',
+            message: 'Oops! There\'s something wrong',
             position: 'bottom',
             duration: 2000
           })
-        })
+        }
       },
       getStyle (num) {
         let style = {}
@@ -190,6 +212,9 @@
   }
   .main-part .tbl-label {
     flex: 0 1 3rem;
+    border-top: none;
+    font-size: 1.2rem;
+    color: #afafbf;
   }
   .tbl-cell {
     display: inline-flex;
@@ -197,4 +222,5 @@
     text-align: center;
     justify-content: space-between;
   }
+
 </style>

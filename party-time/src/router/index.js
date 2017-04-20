@@ -3,7 +3,6 @@ import Router from 'vue-router'
 
 import Hello from '@/components/Hello'
 import sche from '@/page/sche'
-import group from '@/page/group'
 import login from '@/page/login'
 import person from '@/page/person'
 import register from '@/page/register'
@@ -21,11 +20,6 @@ export default new Router({
       path: '/',
       name: 'Hello',
       component: Hello
-    },
-    {
-      path: '/group',
-      name: 'group',
-      component: group
     },
     {
       path: '/sche',
