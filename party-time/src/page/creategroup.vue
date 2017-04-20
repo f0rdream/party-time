@@ -1,16 +1,16 @@
 <template>
   <div>
-    <mt-header fixed title="创建群组">
+    <mt-header  title="创建群组">
       <mt-button @click="$router.go(-1)" slot="left" icon="back"></mt-button>
-
-    </mt-header>
+    </mt-header >
+    <section class="main-part">
     <section>
       <mt-field label="群名称"  v-model="groupName" class="group-name"></mt-field>
     </section>
-    <section>
+    <section class="button-section">
       <mt-button type="primary" @click.native="create" class="btn-large">创建</mt-button>
     </section>
-
+    </section>
   </div>
 </template>
 
@@ -35,14 +35,7 @@
 </script>
 
 <style scoped>
-  section{
-
-    margin-top:40px;
-
-  }
-  .group-name{
-    padding-top:40px;
-  }
+  
   .btn-large{
     display: block;
     margin: 20px auto 0 auto;

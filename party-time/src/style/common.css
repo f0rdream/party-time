@@ -5,6 +5,9 @@ html, body {
 }
 html {
   font-size: 62.5%;
+  width:100%;
+  height:100%;
+  background: rgb(232,232,232);
 }
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei';
@@ -18,6 +21,9 @@ body {
 a {
   background-color: transparent;
   text-decoration: none;
+}
+.mint-header{
+  background: rgb(255,35,61);
 }
 
 .clear::after {
@@ -36,16 +42,29 @@ a {
 .btn-large {
   height: 4rem;
   width: 24rem;
+  border-radius:4rem;
+  border : 2px solid rgb(255,35,61);
+  background: rgb(232,232,232);
+  color: rgb(255,35,61);
 }
 
-.text-info {
-  font-size: 1.2rem;
-}
 
 .middle-box {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+.button-section{
+  background: rgb(232,232,232);
+}
+.mint-tab-container-wrap {
+margin-top:1rem;
+}
+.mint-tab-container{
+  background:rgb(232,232,232) ;
+}
+.main-part{
+  margin-top: 1rem;
 }
 
 
