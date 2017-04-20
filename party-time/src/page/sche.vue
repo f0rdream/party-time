@@ -1,7 +1,7 @@
 <template>
   <div class="app-wrapper">
     <mt-header title="第4周" class="header">
-      <mt-button @click="$router.push('mygroup')" slot="left" icon="back"></mt-button>
+      <mt-button @click="$router.push('mygroup')" slot="left" icon="back">群组</mt-button>
       <mt-button icon="more" slot="right" @click="$router.push('groupmessage')"></mt-button>
     </mt-header>
     <section class="main-part">

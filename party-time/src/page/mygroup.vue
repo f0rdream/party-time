@@ -5,9 +5,9 @@
       <mt-button @click="$router.push('creategroup')" slot="right" icon="back"></mt-button>
     </mt-header>
     <section class="main-part">
-      <mt-cell v-for="group in groups" title="{group.name}" @click.native="choose(group.id)" :key="group.id"><a class="chooseA" href="/schedetail"></a></mt-cell>
+      <mt-cell v-for="group in groups" title="{group.name}" @click.native="choose(group.id)" :key="group.id"><router-link class="chooseA" to="sche"></router-link></mt-cell>
     </section>
-    <tab-bar select-item="群組"></tab-bar>
+    <tab-bar select-item="群组" fixed-props="true"></tab-bar>
   </div>
 </template>
 
@@ -29,8 +29,8 @@
       }
     },
     mounted () {
-      this.$http.get('/group-agenda/group/').then(res => {
-        this.groups = res
+      this.$http.get('group-agenda/group/').then(res => {
+        this.groups = res.body
       })
     }
 

@@ -1,7 +1,6 @@
 <template>
   <div>
     <mt-header fixed title="个人信息">
-      <mt-button @click="$router.go(-1)" slot="left" icon="back"></mt-button>
       <mt-button slot="right" @click="editDone"><span>{{ editable ? '完成' : '编辑'}}</span></mt-button>
     </mt-header>
     <section class="icon-part">
@@ -17,12 +16,17 @@
       <mt-field label="学号" :readonly="!editable" v-model="form.stuId"></mt-field>
       <mt-field label="自我介绍" type="textarea" :readonly="!editable" rows="4" v-model="form.description"></mt-field>
     </section>
+    <tab-bar select-item="个人" fixed-props="true"></tab-bar>
   </div>
 </template>
 
 <script>
   import { Toast } from 'mint-ui'
+  import TabBar from '../components/TabBar'
   export default {
+    components: {
+      TabBar
+    },
     data () {
       return {
         editable: false,
@@ -41,7 +45,7 @@
     },
     methods: {
       initData () {
-        this.$http.get('/accounts/').then(res => {
+        this.$http.get('accounts/').then(res => {
           this.form.username = res.body.username
           this.form.realname = res.body.realname
           this.form.phone = res.body.phone

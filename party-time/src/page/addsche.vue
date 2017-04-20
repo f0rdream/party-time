@@ -81,7 +81,7 @@
           '-' + (this.pickerend.getDate() < 10 ? '0' + this.pickerend.getDate() : this.pickerend.getDate()) + 'T' +
           (this.pickerend.getHours() < 10 ? '0' + this.pickerend.getHours() : this.pickerend.getHours()) + ':' +
           (this.pickerend.getMinutes() < 10 ? '0' + this.pickerend.getMinutes() : this.pickerend.getMinutes()) + ':00Z'
-        this.$http.post('/tasks/create', this.affair).then(res => {
+        this.$http.post('tasks/create', this.affair).then(res => {
           if (res.title) {
             Toast('你已经创建任务' + res.title)
           }
