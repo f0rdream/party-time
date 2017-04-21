@@ -5,11 +5,11 @@
     </mt-header>
     <section class="icon-part">
       <div class="icon-box">
-        <img src="../assets/logo.png">
+        <img :src="picURI">
       </div>
     </section>
     <section class="main-part">
-      <mt-field label="用户名" placeholder="请输入用户名" v-model="form.username"></mt-field>
+      <mt-field label="用户名" placeholder="请输入用户名" v-model="form.username" @blur="getPic"></mt-field>
       <mt-field label="密码" placeholder="请输入密码" v-model="form.password" type="password"></mt-field>
       <div class="cell-box">
         <check-box checkValue="remembered" label="记住登录" v-model="form.remembered"></check-box>
@@ -32,6 +32,7 @@
     },
     data () {
       return {
+        picURI: '../assets/logo.png',
         form: {
           username: '',
           password: '',
@@ -42,7 +43,7 @@
     methods: {
       login () {
         Indicator.open('正在登陆...')
-        this.$http.post('auth/token/', this.form).then(res => {
+        this.$http.post('accounts/login/', this.form).then(res => {
           Indicator.close()
           setMap('isLogin', true)
           Router.go(-1)
@@ -54,6 +55,11 @@
             duration: 2000
           })
           window.console.log(res)
+        })
+      },
+      getPic () {
+        this.$http.get(`accounts/${this.form.username}/load-picture/`).then(res => {
+          this.picURI = res.body.picture
         })
       }
     }

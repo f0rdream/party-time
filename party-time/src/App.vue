@@ -34,5 +34,6 @@
 <style>
   #app {
     font-size: 1.6rem;
+    height: 100%;
   }
 </style>

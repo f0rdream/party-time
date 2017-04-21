@@ -2,6 +2,7 @@
   <div>
     <mt-header title="群组信息">
       <mt-button @click="$router.go(-1)" slot="left" icon="back"></mt-button>
+      <mt-button icon="more" slot="right" @click="$router.push('creategroupsche')"></mt-button>
     </mt-header>
     <section class="main-part">
       <section class="centerSection">
@@ -32,7 +33,7 @@
     },
     methods: {
       quitGroup: function () {
-        this.$http.get('/accounts/' + this.group_id + '/remove-group').then(res => {
+        this.$http.get('accounts/' + this.group_id + '/remove-group').then(res => {
           if (res.groups) {
             Toast('你已经成功退出该群')
           }
@@ -41,7 +42,7 @@
     },
     mounted () {
       this.groupId = getMap('group_id')
-      this.$http.get('/group-agenda/' + this.groupId + '/group-profile/').then(res => {
+      this.$http.get('group-agenda/' + this.groupId + '/group-profile/').then(res => {
         this.picture = res.picture
         this.group = res.group
       })
