@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from rest_framework.fields import BooleanField, NullBooleanField
 from rest_framework_jwt.serializers import JSONWebTokenSerializer
 from tasks.models import Task
-from .models import UserProfile
+from .models import UserProfile,upload_location
 from django.contrib.auth.models import User, Permission
 from rest_framework.serializers import (
     CharField,
@@ -87,6 +87,11 @@ class UserUpdateSerializer(ModelSerializer):
             picture = None
         return picture
 
+    def update(self, instance, validated_data):
+        if validated_data['picture'] is None and instance.picture is not None:
+            validated_data['picture'] = instance.picture
+        return super(UserUpdateSerializer, self).update(instance, validated_data)
+
 
 class UserProfileCreateSerializer(ModelSerializer):
     user = SerializerMethodField()
@@ -115,7 +120,7 @@ class UserCreateSerializer(ModelSerializer):
                          style={'input_type': 'password'})
     password_confirm = CharField(label='Confirm Password',
                                  write_only=True,
-                                 style={'input_type':'password'})
+                                 style={'input_type': 'password'})
     user_profile = UserProfileCreateSerializer(write_only=True)
     profile = UserProfileCreateSerializer(read_only=True)
 
@@ -184,13 +189,13 @@ class UserCreateSerializer(ModelSerializer):
         user_obj.save()
         # user_obj.is_active = False
         content_type = ContentType.objects.get_for_model(Task)
-        # permission_to_add = Permission.objects.get(codename="add_task",
-        #                                            content_type=content_type)
-        # permission_to_change = Permission.objects.get(codename="change_task",
-        #                                               content_type=content_type)
-        # permission_to_delete = Permission.objects.get(codename="delete_task",
-        #                                               content_type=content_type)
-        # user_obj.user_permissions.add(permission_to_add, permission_to_change, permission_to_delete)
+        permission_to_add = Permission.objects.get(codename="add_task",
+                                                   content_type=content_type)
+        permission_to_change = Permission.objects.get(codename="change_task",
+                                                      content_type=content_type)
+        permission_to_delete = Permission.objects.get(codename="delete_task",
+                                                      content_type=content_type)
+        user_obj.user_permissions.add(permission_to_add, permission_to_change, permission_to_delete)
         print "succeed create a user"
         self.create_user_profile(user_obj, validated_data['user_profile'])
         return user_obj
