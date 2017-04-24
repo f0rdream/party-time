@@ -9,7 +9,7 @@
         <div class="tbl-label"></div>
         <div v-for="time in timeData" class="tbl-cell">
           <span class="tbl-time">{{time.split('-')[0]}}</span>
-          <span class="tbl-time" v-if="time==='20:00-22:00'">{{time.split('-')[1]}}</span>
+
         </div>
       </div>
       <div class="col-day" v-for="(day, key, index) in responseData">
@@ -138,25 +138,15 @@
     },
     methods: {
       init () {
-        this.groupId = getMap('groupId')
-        if (this.groupId) {
-          this.$http.get(`group-agenda/${this.groupId}/number/`).then(res => {
-            delete res.body.name
-            this.responseData = res.body
-          }, res => {
-            Toast({
-              message: '获取信息失败',
-              position: 'bottom',
-              duration: 2000
-            })
-          })
-        } else {
+        this.$http.get('tasks/').then(res => {
+          this.responseData = res.body
+        }, res => {
           Toast({
-            message: 'Oops! There\'s something wrong',
+            message: '获取信息失败',
             position: 'bottom',
             duration: 2000
           })
-        }
+        })
       },
       getStyle (num) {
         let style = {}

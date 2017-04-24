@@ -1,6 +1,7 @@
 <template>
   <div>
-    <mt-header fixed title="个人信息">
+    <mt-header title="个人信息">
+      <mt-button slot="left" @click="$router.push('mygroup')" icon="back"><span>群组</span></mt-button>
       <mt-button slot="right" @click="editDone"><span>{{ editable ? '完成' : '编辑'}}</span></mt-button>
     </mt-header>
     <section class="icon-part">
@@ -14,7 +15,7 @@
       <mt-field label="手机" :readonly="!editable" v-model="form.phone_number"></mt-field>
       <mt-field label="邮箱" :readonly="!editable" v-model="form.email"></mt-field>
       <mt-field label="学号" :readonly="!editable" v-model="form.user_stu_id"></mt-field>
-      <mt-field label="自我介绍" type="textarea" :readonly="!editable" rows="4" v-model="form.description"></mt-field>
+      <mt-field label="自我介绍" type="textarea" :readonly="!editable" rows="4" v-model="form.description" class="description"></mt-field>
     </section>
     <tab-bar select-item="个人" :fixed-props="true"></tab-bar>
   </div>
@@ -93,13 +94,16 @@
 <style scoped>
   .icon-part {
     display: flex;
-    height: 30rem;
+    height: 15rem;
   }
   .icon-box {
     margin: auto;
   }
   .icon-box img {
-    width: 10rem;
-    height: 10rem;
+    width: 5rem;
+    height: 5rem;
+  }
+  .description {
+    margin-top: 1rem;
   }
 </style>
