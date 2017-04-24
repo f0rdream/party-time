@@ -128,8 +128,8 @@ class GroupProfileUpdateSerializer(ModelSerializer):
 class GroupCreateSerializer(ModelSerializer):
     """To create a group with certain permissions"""
     name = CharField(label="group name")
-    group_profile = GroupProfileDetailSerializer(write_only=True)
-    profile = GroupProfileDetailSerializer(read_only=True)
+    group_profile = GroupProfileUpdateSerializer(write_only=True)
+    profile = GroupProfileUpdateSerializer(read_only=True)
 
     class Meta:
         model = Group
