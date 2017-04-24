@@ -139,16 +139,17 @@ class UserCreateSerializer(ModelSerializer):
         }
 
     def validate(self, attrs):
+        print attrs
         del attrs['password_confirm']
         return attrs
 
-    def validate_password_confirm(self, value):
-        data = self.get_initial()
-        password = data.get('password')
-        password_confirm = data.get('password_confirm')
-        if password != password_confirm:
-            raise ValidationError("The password is not confirmed")
-        return value
+    # def validate_password_confirm(self, value):
+    #     data = self.get_initial()
+    #     password = data.get('password')
+    #     password_confirm = data.get('password_confirm')
+    #     if password != password_confirm:
+    #         raise ValidationError("The password is not confirmed")
+    #     return value
 
     def validate_email(self, value):
         data = self.get_initial()
@@ -179,7 +180,7 @@ class UserCreateSerializer(ModelSerializer):
         user_profile.save()
 
     def create(self, validated_data):
-        print validated_data
+        # print validated_data
         username = validated_data['username']
         email = validated_data['email']
         password = validated_data['password']
@@ -188,14 +189,14 @@ class UserCreateSerializer(ModelSerializer):
         user_obj.set_password(password)
         user_obj.save()
         # user_obj.is_active = False
-        content_type = ContentType.objects.get_for_model(Task)
-        permission_to_add = Permission.objects.get(codename="add_task",
-                                                   content_type=content_type)
-        permission_to_change = Permission.objects.get(codename="change_task",
-                                                      content_type=content_type)
-        permission_to_delete = Permission.objects.get(codename="delete_task",
-                                                      content_type=content_type)
-        user_obj.user_permissions.add(permission_to_add, permission_to_change, permission_to_delete)
+        # content_type = ContentType.objects.get_for_model(Task)
+        # permission_to_add = Permission.objects.get(codename="add_task",
+        #                                            content_type=content_type)
+        # permission_to_change = Permission.objects.get(codename="change_task",
+        #                                               content_type=content_type)
+        # permission_to_delete = Permission.objects.get(codename="delete_task",
+        #                                               content_type=content_type)
+        # user_obj.user_permissions.add(permission_to_add, permission_to_change, permission_to_delete)
         print "succeed create a user"
         self.create_user_profile(user_obj, validated_data['user_profile'])
         return user_obj
