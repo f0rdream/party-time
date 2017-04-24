@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from rest_framework.fields import BooleanField, NullBooleanField
 from rest_framework_jwt.serializers import JSONWebTokenSerializer
 from tasks.models import Task
-from .models import UserProfile
+from .models import UserProfile,upload_location
 from django.contrib.auth.models import User, Permission
 from rest_framework.serializers import (
     CharField,
@@ -87,6 +87,11 @@ class UserUpdateSerializer(ModelSerializer):
             picture = None
         return picture
 
+    def update(self, instance, validated_data):
+        if validated_data['picture'] is None and instance.picture is not None:
+            validated_data['picture'] = instance.picture
+        return super(UserUpdateSerializer, self).update(instance, validated_data)
+
 
 class UserProfileCreateSerializer(ModelSerializer):
     user = SerializerMethodField()
@@ -115,7 +120,7 @@ class UserCreateSerializer(ModelSerializer):
                          style={'input_type': 'password'})
     password_confirm = CharField(label='Confirm Password',
                                  write_only=True,
-                                 style={'input_type':'password'})
+                                 style={'input_type': 'password'})
     user_profile = UserProfileCreateSerializer(write_only=True)
     profile = UserProfileCreateSerializer(read_only=True)
 
@@ -134,16 +139,17 @@ class UserCreateSerializer(ModelSerializer):
         }
 
     def validate(self, attrs):
+        print attrs
         del attrs['password_confirm']
         return attrs
 
-    def validate_password_confirm(self, value):
-        data = self.get_initial()
-        password = data.get('password')
-        password_confirm = data.get('password_confirm')
-        if password != password_confirm:
-            raise ValidationError("The password is not confirmed")
-        return value
+    # def validate_password_confirm(self, value):
+    #     data = self.get_initial()
+    #     password = data.get('password')
+    #     password_confirm = data.get('password_confirm')
+    #     if password != password_confirm:
+    #         raise ValidationError("The password is not confirmed")
+    #     return value
 
     def validate_email(self, value):
         data = self.get_initial()
@@ -174,7 +180,7 @@ class UserCreateSerializer(ModelSerializer):
         user_profile.save()
 
     def create(self, validated_data):
-        print validated_data
+        # print validated_data
         username = validated_data['username']
         email = validated_data['email']
         password = validated_data['password']
@@ -183,7 +189,7 @@ class UserCreateSerializer(ModelSerializer):
         user_obj.set_password(password)
         user_obj.save()
         # user_obj.is_active = False
-        content_type = ContentType.objects.get_for_model(Task)
+        # content_type = ContentType.objects.get_for_model(Task)
         # permission_to_add = Permission.objects.get(codename="add_task",
         #                                            content_type=content_type)
         # permission_to_change = Permission.objects.get(codename="change_task",

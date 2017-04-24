@@ -29,7 +29,12 @@ from django.contrib.auth.models import Group
 
 class AgendaListAPIView(ListAPIView):
     serializer_class = AgendaListSerializer
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = [IsAuthenticated]
+
+    def get_current_group(self):
+        current_group_set = Group.objects.filter(user=self.request.user)
+        print current_group_set
+        return current_group_set
 
     def get_queryset(self, *args, **kwargs):
         queryset = Agenda.objects.filter(group=None)
@@ -38,14 +43,9 @@ class AgendaListAPIView(ListAPIView):
             queryset = queryset | _queryset
         return queryset
 
-    def get_current_group(self):
-        current_group_set = Group.objects.filter(user=self.request.user)
-        print current_group_set
-        return current_group_set
-
 
 class AgendaDetailAPIView(APIView):
-    permission_classes = [IsAuthenticated, IsAdminUser]
+    permission_classes = [IsAuthenticated]
 
     def get_object(self, group_id, pk):
         print group_id
@@ -62,9 +62,6 @@ class AgendaDetailAPIView(APIView):
         agenda = self.get_object(group_id, pk)
         serializer = AgendaDetailSerializer(agenda)
         return Response(serializer.data)
-
-
-'''RAW Agenda refresh to check if the agenda instance is passed'''
 
 
 class AgendaRefreshAPIView(APIView):
@@ -91,7 +88,7 @@ class AgendaRefreshAPIView(APIView):
             pre_agenda = Agenda.objects.filter(pk=pre_agenda.pk).update(has_pass=True)
         serializer = AgendaRefreshSerializer(pre_agenda)
         agenda = self.get_object(group_id, pk)
-        if agenda.has_pass == True:
+        if agenda.has_pass:
             serializer = AgendaDetailSerializer(agenda)
         return Response(serializer.data, status=HTTP_200_OK)
 
@@ -100,7 +97,7 @@ class AgendaRefreshAPIView(APIView):
 
 class AgendaCreateAPIView(CreateAPIView):
     serializer_class = AgendaCreateSerializer
-    permission_classes = [IsAuthenticated, IsAuthenticated]
+    permission_classes = [IsAuthenticated]
 
     # def get_serializer_context(self):
 
@@ -138,7 +135,10 @@ class AgendaPostAPIView(APIView):
         start_time = data['start_time']
         end_time = data['end_time']
         print type(start_time)
-        group = Group.objects.get(id=group_id)
+        try:
+            group = Group.objects.get(id=group_id)
+        except Group.DoesNotExist:
+            raise Http404
         agenda = Agenda.objects.create(title=title,
                                        start_time=start_time,
                                        detail=detail,
@@ -217,16 +217,25 @@ class GroupProfileUpdateAPIView(APIView):
     serializer_class = GroupProfileUpdateSerializer
     permission_classes = [IsAuthenticated]
 
-    def put(self, request, group_id, *args, **kwargs):
-        data = request.data
+    def get_object(self, group_id):
         try:
             group = Group.objects.get(id=group_id)
             group_profile = GroupProfile.objects.get(group=group)
-        except Group.DoesNotExist:
+        except Group.DoesNotExist or GroupProfile.DoesNotExist:
             raise Http404
-        except GroupProfile.DoesNotExist:
-            raise Http404
+        return group_profile
+
+    def get(self, request, group_id, *args, **kwargs):
+        data = request.data
+        group_profile = self.get_object(group_id)
         serializer = GroupProfileDetailSerializer(group_profile, data=data)
+        if serializer.is_valid(raise_exception=True):
+            return Response(serializer.data, status=HTTP_200_OK)
+
+    def put(self, request, group_id, *args, **kwargs):
+        data = request.data
+        group_profile = self.get_object(group_id)
+        serializer = GroupProfileUpdateSerializer(group_profile, data=data)
         if serializer.is_valid(raise_exception=True):
             serializer.save()
             return Response(serializer.data, status=HTTP_200_OK)
@@ -254,6 +263,7 @@ class NumberInGroupAPIView(RetrieveAPIView):
     permission_classes = [IsAuthenticated]
     lookup_field = "id"
     queryset = Group.objects.all()
+
 
 @login_required
 @api_view(['GET'])

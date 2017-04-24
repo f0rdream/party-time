@@ -7,7 +7,7 @@ from rest_framework.serializers import (
 from django.utils import timezone
 task_detail_url = HyperlinkedIdentityField(
         view_name='tasks:detail',
-        lookup_field='title'
+        lookup_field='pk'
     )
 
 
@@ -15,7 +15,7 @@ class TaskListSerializer(ModelSerializer):
     url = task_detail_url
     delete_url = HyperlinkedIdentityField(
         view_name='tasks:delete',
-        lookup_field='title'
+        lookup_field='pk'
     )
     user = SerializerMethodField()
     is_past = SerializerMethodField()

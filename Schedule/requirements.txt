@@ -8,3 +8,7 @@ Pygments==2.2.0
 PyJWT==1.4.2
 requests==2.13.0
 wheel==0.24.0
+bs4==0.0.1
+beautifulsoup4==4.5.3
+lxml==3.7.3
+Pillow==4.1.0
