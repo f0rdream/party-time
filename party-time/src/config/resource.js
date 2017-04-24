@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import VueResource from 'vue-resource'
 // import Router from '../router'
-import baseUrl from './env'
 
 Vue.use(VueResource)
 
-Vue.http.options.root = baseUrl
+Vue.http.options.credentials = true
 
 // function clean (obj) {
 //   for (let key in obj) {
@@ -18,22 +17,9 @@ Vue.http.options.root = baseUrl
 // emlulate json if the server don't suppot json
 // Vue.http.options.emulateJSON = true
 
-// Vue.http.interceptors.push(function(request, next) {
-//   request: function (request) {
-//     let ret = Object.assign({}, request)
-//     clean(ret.data)
-//     clean(ret.params)
-//     return ret
-//   },
-//   response: function (response) {
-//     let res = Object.assign({}, response)
-//     if (res.ok) {
-//       if (res.data.status && Number(res.data.status) !== 0) {
-//         res.ok = false
-//       } else if (res.status === 403) {
-//         Router.replace('/login')
-//       }
-//     }
-//     return res
-//   }
+// Vue.http.interceptors.push(function (request, next) {
+//   let ret = Object.assign({}, request)
+//   clean(ret.data)
+//   clean(ret.params)
+//   return ret
 // })

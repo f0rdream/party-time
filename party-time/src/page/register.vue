@@ -29,10 +29,7 @@
         form: {
           username: '',
           password: '',
-          realname: '',
-          phone: '',
-          email: '',
-          user_stu_id: ''
+          email: ''
         },
         wait: false
       }

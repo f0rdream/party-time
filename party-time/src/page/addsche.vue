@@ -127,7 +127,7 @@
   display: flex;
 }
 .button-section{
-   padding-top:2rem;
+  padding-top:2rem;
   background: rgb(232,232,232);
 }
 .main-part {

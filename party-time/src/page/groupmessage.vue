@@ -38,6 +38,9 @@
             Toast('你已经成功退出该群')
           }
         })
+      },
+      getPosition: function () {
+
       }
     },
     mounted () {
