@@ -9,13 +9,12 @@
         <div class="tbl-label"></div>
         <div v-for="time in timeData" class="tbl-cell">
           <span class="tbl-time">{{time.split('-')[0]}}</span>
-
         </div>
       </div>
       <div class="col-day" v-for="(day, key, index) in responseData">
         <div class="tbl-label">{{dayLabel[index]}}</div>
-        <div v-for="time in day" :style="getStyle(time)" class="day-cell">
-          {{time}}
+        <div v-for="event in day" :style="getPosition(event.start_time, event.end_time)" class="day-cell">
+
         </div>
       </div>
     </section>
@@ -23,102 +22,177 @@
 </template>
 
 <script>
-  import { getMap } from '../config/store'
+  // import { getMap } from '../config/store'
   import { Toast } from 'mint-ui'
 
   export default {
     data () {
       return {
         groupId: '',
-//        timeData: ['6:00-8:00', '8:00-10:00', '10:00-12:00', '12:00-14:00', '14:00-16:00', '16:00-18:00', '18:00-20:00', '20:00-22:00'],
+        timeData: ['6:00-8:00', '8:00-10:00', '10:00-12:00', '12:00-14:00', '14:00-16:00', '16:00-18:00', '18:00-20:00', '20:00-22:00'],
 //        dayLabel: ['2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
         responseData: {
-          'first_day': {
-            '6:00-8:00': 0,
-            '8:00-10:00': 0,
-            '16:00-18:00': 2,
-            '10:00-12:00': 4,
-            '12:00-14:00': 0,
-            '14:00-16:00': 5,
-            '18:00-20:00': 0,
-            '20:00-22:00': 0
-          },
-          'second_day': {
-            '6:00-8:00': 0,
-            '8:00-10:00': 0,
-            '16:00-18:00': 2,
-            '10:00-12:00': 4,
-            '12:00-14:00': 0,
-            '14:00-16:00': 5,
-            '18:00-20:00': 0,
-            '20:00-22:00': 0
-          },
-          'third_day': {
-            '6:00-8:00': 0,
-            '8:00-10:00': 0,
-            '16:00-18:00': 2,
-            '10:00-12:00': 4,
-            '12:00-14:00': 3,
-            '14:00-16:00': 5,
-            '18:00-20:00': 0,
-            '20:00-22:00': 8
-          },
-          'fourth_day': {
-            '6:00-8:00': 0,
-            '8:00-10:00': 0,
-            '16:00-18:00': 2,
-            '10:00-12:00': 4,
-            '12:00-14:00': 1,
-            '14:00-16:00': 5,
-            '18:00-20:00': 0,
-            '20:00-22:00': 0
-          },
-          'fifth_day': {
-            '6:00-8:00': 0,
-            '8:00-10:00': 0,
-            '16:00-18:00': 2,
-            '10:00-12:00': 4,
-            '12:00-14:00': 0,
-            '14:00-16:00': 5,
-            '18:00-20:00': 0,
-            '20:00-22:00': 0
-          },
-          'sixth_day': {
-            '6:00-8:00': 0,
-            '8:00-10:00': 0,
-            '16:00-18:00': 2,
-            '10:00-12:00': 4,
-            '12:00-14:00': 0,
-            '14:00-16:00': 5,
-            '18:00-20:00': 0,
-            '20:00-22:00': 0
-          },
-          'seventh_day': {
-            '6:00-8:00': 0,
-            '8:00-10:00': 0,
-            '16:00-18:00': 2,
-            '10:00-12:00': 4,
-            '12:00-14:00': 0,
-            '14:00-16:00': 5,
-            '18:00-20:00': 0,
-            '20:00-22:00': 0
-          }
-        }           /* Add default responseData data in case get failed */
+          'second_day': [
+            {
+              'url': 'http://127.0.0.1:8000/tasks/15/',
+              'delete_url': 'http://127.0.0.1:8000/tasks/15/delete',
+              'id': 15,
+              'user': 'djangotest',
+              'title': 'abcabcabc',
+              'start_time': '2017-04-25T01:00:00Z',
+              'end_time': '2017-12-31T12:59:00Z',
+              'is_past': false
+            },
+            {
+              'url': 'http://127.0.0.1:8000/tasks/16/',
+              'delete_url': 'http://127.0.0.1:8000/tasks/16/delete',
+              'id': 16,
+              'user': 'djangotest',
+              'title': 'gdsfgdsgdf',
+              'start_time': '2017-04-25T01:02:00Z',
+              'end_time': '2017-12-31T12:59:00Z',
+              'is_past': false
+            }
+          ],
+          'seventh_day': [
+            {
+              'url': 'http://127.0.0.1:8000/tasks/15/',
+              'delete_url': 'http://127.0.0.1:8000/tasks/15/delete',
+              'id': 15,
+              'user': 'djangotest',
+              'title': 'abcabcabc',
+              'start_time': '2017-04-25T01:00:00Z',
+              'end_time': '2017-12-31T12:59:00Z',
+              'is_past': false
+            },
+            {
+              'url': 'http://127.0.0.1:8000/tasks/16/',
+              'delete_url': 'http://127.0.0.1:8000/tasks/16/delete',
+              'id': 16,
+              'user': 'djangotest',
+              'title': 'gdsfgdsgdf',
+              'start_time': '2017-04-25T01:02:00Z',
+              'end_time': '2017-12-31T12:59:00Z',
+              'is_past': false
+            }
+          ],
+          'third_day': [
+            {
+              'url': 'http://127.0.0.1:8000/tasks/15/',
+              'delete_url': 'http://127.0.0.1:8000/tasks/15/delete',
+              'id': 15,
+              'user': 'djangotest',
+              'title': 'abcabcabc',
+              'start_time': '2017-04-25T01:00:00Z',
+              'end_time': '2017-12-31T12:59:00Z',
+              'is_past': false
+            },
+            {
+              'url': 'http://127.0.0.1:8000/tasks/16/',
+              'delete_url': 'http://127.0.0.1:8000/tasks/16/delete',
+              'id': 16,
+              'user': 'djangotest',
+              'title': 'gdsfgdsgdf',
+              'start_time': '2017-04-25T01:02:00Z',
+              'end_time': '2017-12-31T12:59:00Z',
+              'is_past': false
+            }
+          ],
+          'sixth_day': [
+            {
+              'url': 'http://127.0.0.1:8000/tasks/15/',
+              'delete_url': 'http://127.0.0.1:8000/tasks/15/delete',
+              'id': 15,
+              'user': 'djangotest',
+              'title': 'abcabcabc',
+              'start_time': '2017-04-25T01:00:00Z',
+              'end_time': '2017-12-31T12:59:00Z',
+              'is_past': false
+            },
+            {
+              'url': 'http://127.0.0.1:8000/tasks/16/',
+              'delete_url': 'http://127.0.0.1:8000/tasks/16/delete',
+              'id': 16,
+              'user': 'djangotest',
+              'title': 'gdsfgdsgdf',
+              'start_time': '2017-04-25T01:02:00Z',
+              'end_time': '2017-12-31T12:59:00Z',
+              'is_past': false
+            }
+          ],
+          'fifth_day': [
+            {
+              'url': 'http://127.0.0.1:8000/tasks/15/',
+              'delete_url': 'http://127.0.0.1:8000/tasks/15/delete',
+              'id': 15,
+              'user': 'djangotest',
+              'title': 'abcabcabc',
+              'start_time': '2017-04-25T01:00:00Z',
+              'end_time': '2017-12-31T12:59:00Z',
+              'is_past': false
+            },
+            {
+              'url': 'http://127.0.0.1:8000/tasks/16/',
+              'delete_url': 'http://127.0.0.1:8000/tasks/16/delete',
+              'id': 16,
+              'user': 'djangotest',
+              'title': 'gdsfgdsgdf',
+              'start_time': '2017-04-25T01:02:00Z',
+              'end_time': '2017-12-31T12:59:00Z',
+              'is_past': false
+            }
+          ],
+          'first_day': [
+            {
+              'url': 'http://127.0.0.1:8000/tasks/15/',
+              'delete_url': 'http://127.0.0.1:8000/tasks/15/delete',
+              'id': 15,
+              'user': 'djangotest',
+              'title': 'abcabcabc',
+              'start_time': '2017-04-25T01:00:00Z',
+              'end_time': '2017-12-31T12:59:00Z',
+              'is_past': false
+            },
+            {
+              'url': 'http://127.0.0.1:8000/tasks/16/',
+              'delete_url': 'http://127.0.0.1:8000/tasks/16/delete',
+              'id': 16,
+              'user': 'djangotest',
+              'title': 'gdsfgdsgdf',
+              'start_time': '2017-04-25T01:02:00Z',
+              'end_time': '2017-12-31T12:59:00Z',
+              'is_past': false
+            }
+          ],
+          'fourth_day': [
+            {
+              'url': 'http://127.0.0.1:8000/tasks/15/',
+              'delete_url': 'http://127.0.0.1:8000/tasks/15/delete',
+              'id': 15,
+              'user': 'djangotest',
+              'title': 'abcabcabc',
+              'start_time': '2017-04-25T01:00:00Z',
+              'end_time': '2017-12-31T12:59:00Z',
+              'is_past': false
+            },
+            {
+              'url': 'http://127.0.0.1:8000/tasks/16/',
+              'delete_url': 'http://127.0.0.1:8000/tasks/16/delete',
+              'id': 16,
+              'user': 'djangotest',
+              'title': 'gdsfgdsgdf',
+              'start_time': '2017-04-25T01:02:00Z',
+              'end_time': '2017-12-31T12:59:00Z',
+              'is_past': false
+            }
+          ]
+        }
       }
     },
     mounted () {
       this.init()
     },
     computed: {
-      timeData: function () {
-        let timeData = []
-        for (let time in this.responseData.first_day) {
-          if (this.responseData.first_day.hasOwnProperty(time)) {
-            timeData.push(time)
-          }
-        }
-        return timeData
-      },
       dayLabel: function () {
         let now = new Date()
         let nowYear = now.getFullYear()
@@ -138,7 +212,7 @@
     },
     methods: {
       init () {
-        this.$http.get('tasks/').then(res => {
+        this.$http.get('tasks/week-list/').then(res => {
           this.responseData = res.body
         }, res => {
           Toast({
@@ -160,11 +234,25 @@
         }
         return style
       },
-      getPosition () {
-        let endHour = 22
-        let startHour = 6
-        let total = (endHour - startHour) * 60
-
+      getPosition (startTime, endTime) {
+        // let style = {}
+        const totalMin = (22 - 6) * 60
+        function getJSTime (time) {
+          return new Date(
+            time.split(/-|T|Z/).forEach(item => { item + '' }
+            )
+          )
+        }
+        let length = (getJSTime(startTime).getTime() - getJSTime(endTime).getTime()) / 1000 / 60 / totalMin
+        let startPos = (getJSTime(startTime).getTime / 1000 / 60) / totalMin
+        console.log(length)
+        console.log(startPos)
+        // style.length = `${length}%`
+        // style.top =
+        return {
+          top: `${startPos}%`,
+          length: `${length}%`
+        }
       }
     }
   }
@@ -198,25 +286,13 @@
     color: #afafbf;
   }
   .col-day {
-    display: flex;
     flex-direction: column;
-  }
-  .col-day>div {
-    flex: 1 1 8%;
-    border-top: 1px solid #494351;
-    box-sizing: border-box;
   }
   .main-part .tbl-label {
     flex: 0 1 3rem;
     border-top: none;
     font-size: 1.2rem;
     color: #afafbf;
-  }
-  .tbl-cell {
-    display: inline-flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: space-between;
   }
 
 </style>

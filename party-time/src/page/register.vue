@@ -6,7 +6,7 @@
     <section class="page-part">
       <mt-field label="用户名" placeholder="请输入用户名" v-model="form.username"></mt-field>
       <mt-field label="密码" placeholder="请输入密码" v-model="form.password" type="password"></mt-field>
-      <mt-field label="密码" placeholder="确认密码" type="password"></mt-field>
+      <mt-field label="确认密码" placeholder="确认密码" type="password"></mt-field>
     </section>
     <section class="page-part">
       <mt-field label="真实姓名" placeholder="方便您的朋友找到您" v-model="form.realname"></mt-field>
@@ -50,10 +50,15 @@
   }
 </script>
 <style scoped>
+  .page-part {
+    margin-top: 3rem;
+  }
   .middle-box {
     margin-top: 1.5rem;
   }
   .text-info {
     margin-top: 1rem;
+    color: #9c9c9c;
+    font-size: 1.2rem;
   }
 </style>

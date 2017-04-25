@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^(?P<group_id>\d+)/add-group/$', UserAddGroupAPIView.as_view(), name='add_group'),
     url(r'^(?P<username>\w+)/check-username/$', check_username, name="check_username"),
     url(r'(?P<username>\w+)/load-picture/$', LoadPictureAPIView.as_view(), name="load_picture"),
-    url(r'is-login/$', is_login_view, name="is_login")
-    # url(r'^add-group/(?P<username>\w+)/(?P<group_id>\d+)/$', add_group2, name='add_group'),
+    url(r'is-login/$', is_login_view, name="is_login"),
+    url(r'^add-group/(?P<username>\w+)/(?P<group_id>\d+)/$', add_group2, name='add_group2'),
     # url(r'^remove-group/(?P<group_id>\d+)/$', remove_from_group, name='remove_from_group'),
 ]

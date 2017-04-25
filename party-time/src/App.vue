@@ -16,13 +16,13 @@
     methods: {
       isLogin () {
         this.$http.get('accounts/is-login/').then(res => {
-          console.log(res)
           if (res.data) {
             setMap('isLogin', true)
           } else {
-            this.$router.go('/login')
+            this.$router.push('login')
           }
         }, res => {
+          this.$router.push('login')
           window.console.log('Failed for some reasons')
         })
       }
