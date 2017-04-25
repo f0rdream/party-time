@@ -9,8 +9,9 @@ from .utils import create_token, token_generator
 def upload_location(instance, filename):
     #filebase, extension = filename.split(".")
     #return "%s/%s.%s" %(instance.id, instance.id, extension)
-    ProfileModel = instance.__class__
-    new_id = ProfileModel.objects.order_by("id").last().id + 1
+#     ProfileModel = instance.__class__
+#     new_id = ProfileModel.objects.order_by("id").last().id + 1
+    new_id = instance.pk
 
     return "%s/%s" %(new_id, filename)
 

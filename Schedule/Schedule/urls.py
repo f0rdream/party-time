@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'tasks/', include('tasks.urls', namespace='tasks')),
     url(r'accounts/',include('accounts.urls', namespace='accounts')),
     url(r'group-agenda/', include('groupagenda.urls', namespace='groupagenda')),
+    url(r'courses/',include('courses.urls',namespace='courses'))
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

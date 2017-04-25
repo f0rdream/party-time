@@ -6,12 +6,27 @@
   <section class="main-part">
     <section class="search-box">
       <img src="../img/search.png" class="search"/>
-      <input type="text" placeholder="你可以输入用户名，真实名称，电话号码" @submit="search"/>
+      <input type="text" placeholder="你可以输入用户名，真实名称，电话号码" @submit="search" v-model="searchValue"/>
     </section>
   </section>
   </div>
 </template>
 <script>
+  export default {
+    data () {
+      return {
+        searchValue: ''
+      }
+    },
+    methods: {
+      search: function () {
+        console.log('submit')
+      }
+    },
+    mounted () {
+    }
+
+  }
 </script>
 <style>
 .search-box{

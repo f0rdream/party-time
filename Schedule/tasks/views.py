@@ -23,7 +23,7 @@ from rest_framework.authentication import SessionAuthentication
 class TaskListAPIView(ListAPIView):
     serializer_class = TaskListSerializer
     permission_classes = [IsAuthenticated]
-    lookup_field = 'title'
+    lookup_field = 'pk'
 
     def get_queryset(self, *args, **kwargs):
         queryset = Task.objects.filter(user=self.request.user)
@@ -33,7 +33,7 @@ class TaskListAPIView(ListAPIView):
 class TaskDetailAPIView(RetrieveAPIView):
     serializer_class = TaskDetailSerializer
     permission_classes = [IsAuthenticated]
-    lookup_field = 'title'
+    lookup_field = 'pk'
 
     def get_queryset(self, *args, **kwargs):
         queryset = Task.objects.filter(user=self.request.user)
@@ -73,7 +73,7 @@ class TaskCreateAPIView(CreateAPIView):
 class TaskUpdateAPIView(RetrieveUpdateAPIView):
     serializer_class = TaskCreateUpdateSerializer
     permission_classes = [IsAuthenticated]
-    lookup_field = 'title'
+    lookup_field = 'pk'
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -86,7 +86,7 @@ class TaskUpdateAPIView(RetrieveUpdateAPIView):
 class TaskDeleteAPIView(DestroyAPIView):
     serializer_class = TaskDetailSerializer
     permission_classes = [MyIsAuthenticated]
-    lookup_field = 'title'
+    lookup_field = 'pk'
 
     def get_queryset(self,*args,**kwargs):
         queryset = Task.objects.filter(user=self.request.user)
