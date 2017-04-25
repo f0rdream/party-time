@@ -11,7 +11,6 @@ from .serializers import (
     CouseDetailSerializer,
     StudentInfoSerialzier,
     )
-
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.views import APIView
 from rest_framework.status import (

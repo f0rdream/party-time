@@ -36,6 +36,19 @@ class TaskListAPIView(ListAPIView):
     filter_backends = [SearchFilter, OrderingFilter]
 
     def get_queryset(self, *args, **kwargs):
+        # update the course'date,every monday
+        if datetime.datetime.now().weekday() == 0:
+            for task in Task.objects.filter(is_course=True):
+                day = task.day
+                start_num = task.start_num
+                end_num = task.end_num
+                date = get_date(day)
+                start_time = str(date) + "T" + get_start_time(start_num)
+                end_time = str(date) + "T" + get_end_time(end_num)
+                task.start_time = start_time
+                task.end_time = end_time
+                task.save()
+                print task.start_time, task.end_time
         queryset = Task.objects.filter(user=self.request.user)
         query = self.request.GET.get("search")
         if query:

@@ -13,6 +13,10 @@ class Task(models.Model):
     detail = models.TextField(blank=True, null=True)
     start_time = models.DateTimeField()  # 开始时间
     end_time = models.DateTimeField()  # 结束时间
+    is_course = models.BooleanField(default=False)
+    day = models.CharField(max_length=100,blank=True,null=True,default=None)
+    start_num = models.CharField(max_length=100,blank=True,null=True,default=None)
+    end_num = models.CharField(max_length=100,blank=True,null=True,default=None)
     # slug = models.SlugField(unique=True)
     # start_week = models.IntegerField(null=True, blank=True, choices=WEEK_CHOICES) # 开始周
     # end_week = models.IntegerField(null=True, blank=True, choices=WEEK_CHOICES) # 结束周
