@@ -103,14 +103,30 @@ class TaskDeleteAPIView(DestroyAPIView):
 
 class TaskWeekAPIView(APIView):
     """ api for task in a week"""
-    first_day = dt.combine(datetime.date.today(), datetime.time())
-    second_day = dt.combine(datetime.date.today()+datetime.timedelta(days=1), datetime.time())
-    third_day = dt.combine(datetime.date.today()+datetime.timedelta(days=2), datetime.time())
-    fourth_day = dt.combine(datetime.date.today()+datetime.timedelta(days=3), datetime.time())
-    fifth_day = dt.combine(datetime.date.today()+datetime.timedelta(days=4), datetime.time())
-    sixth_day = dt.combine(datetime.date.today()+datetime.timedelta(days=5), datetime.time())
-    seventh_day = dt.combine(datetime.date.today()+datetime.timedelta(days=6), datetime.time())
-    eighth_day = dt.combine(datetime.date.today()+datetime.timedelta(days=7), datetime.time())
+
+    first_day = timezone.make_aware(dt.combine(datetime.date.today(),
+                                               datetime.time()),
+                                    timezone.get_current_timezone())
+    second_day =  timezone.make_aware(dt.combine(datetime.date.today()+datetime.timedelta(days=1),
+                                                 datetime.time()),
+                                      timezone.get_current_timezone())
+    third_day =  timezone.make_aware(dt.combine(datetime.date.today()+datetime.timedelta(days=2),
+                                                datetime.time()),
+                                     timezone.get_current_timezone())
+    fourth_day =  timezone.make_aware(dt.combine(datetime.date.today()+datetime.timedelta(days=3),
+                                                 datetime.time()),
+                                      timezone.get_current_timezone())
+    fifth_day =  timezone.make_aware(dt.combine(datetime.date.today()+datetime.timedelta(days=4),
+                                                datetime.time()),
+                                     timezone.get_current_timezone())
+    sixth_day =  timezone.make_aware(dt.combine(datetime.date.today()+datetime.timedelta(days=5),
+                                                datetime.time()),timezone.get_current_timezone())
+    seventh_day =  timezone.make_aware(dt.combine(datetime.date.today()+datetime.timedelta(days=6),
+                                                  datetime.time()),
+                                       timezone.get_current_timezone())
+    eighth_day =  timezone.make_aware(dt.combine(datetime.date.today()+datetime.timedelta(days=7),
+                                                 datetime.time()),
+                                      timezone.get_current_timezone())
 
     def get_queryset(self, day1, day2):
         user = self.request.user
