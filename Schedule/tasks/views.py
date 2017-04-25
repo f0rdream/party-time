@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from rest_framework.decorators import api_view
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK
 from rest_framework.views import APIView
@@ -31,9 +33,15 @@ class TaskListAPIView(ListAPIView):
     serializer_class = TaskListSerializer
     permission_classes = [IsAuthenticated]
     lookup_field = 'pk'
+    filter_backends = [SearchFilter, OrderingFilter]
 
     def get_queryset(self, *args, **kwargs):
         queryset = Task.objects.filter(user=self.request.user)
+        query = self.request.GET.get("search")
+        if query:
+            queryset = Task.objects.filter(Q(start_time__icontains=query)|
+                                           Q(end_time__icontains=query)|
+                                           Q(title__icontains=query), user=self.request.user)
         return queryset
 
 
@@ -149,4 +157,6 @@ class TaskWeekAPIView(APIView):
             'seventh_day': self.get_serializer(self.seventh_day, self.eighth_day)
         }
         return Response(week_dict, status=HTTP_200_OK)
+
+
 
