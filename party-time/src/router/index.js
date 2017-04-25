@@ -11,6 +11,7 @@ import creategroupsche from '@/page/creategroupsche'
 import creategroup from '@/page/creategroup'
 import mygroup from '@/page/mygroup'
 import groupmessage from '@/page/groupmessage'
+import addperson from '@/page/addperson'
 Vue.use(Router)
 
 export default new Router({
@@ -64,6 +65,10 @@ export default new Router({
     {
       path: '/groupmessage',
       component: groupmessage
+    },
+    {
+      path: '/addperson',
+      component: addperson
     }
 
   ]
