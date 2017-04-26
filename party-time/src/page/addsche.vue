@@ -12,11 +12,11 @@
         <mt-tab-container v-model="selected">
           <mt-tab-container-item id="1">
             <section>
-            <mt-field label="系统账号" placeholder="请输入系统账号"></mt-field>
-            <mt-field label="登录密码" placeholder="请输入登录密码"></mt-field>
+            <mt-field label="系统账号" placeholder="请输入系统账号" v-model="person.user_stu_id"></mt-field>
+            <mt-field label="登录密码" placeholder="请输入登录密码" v-model="person.user_stu_pwd"></mt-field>
             </section>
             <section class="button-section">
-            <mt-button type="default" class="btn-large">登录</mt-button>
+            <mt-button type="default" class="btn-large" click.native="login">登录</mt-button>
             </section>
           </mt-tab-container-item>
           <mt-tab-container-item id="2">
@@ -66,6 +66,12 @@
           detail: '',
           start_time: '',
           end_time: ''
+        },
+        student: {
+          yzm_cookie: '',
+          yzm_url: '',
+          user_stu_id: '',
+          user_stu_pwd: ''
         }
       }
     },
@@ -85,6 +91,19 @@
           if (res.title) {
             Toast('你已经创建任务' + res.title)
           }
+        })
+      },
+      login () {
+        this.$http.get('/courses/yzm').then(res => {
+          if (res.yzm_cookie) {
+            this.person.yzm_cookie = res.yzm_cookie
+          }
+          if (res.yzm_url) {
+            this.person.yzm_url = res.yzm_url
+          }
+        })
+        this.$http.post('/courses/', this.student).then(res => {
+
         })
       },
       showPickerStart () {

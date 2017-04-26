@@ -19,6 +19,7 @@
         <mt-button type="primary" @click.native="login" class="btn-large">登录</mt-button>
         <router-link to="register" class="text-info">没有账号?注册</router-link>
       </div>
+      <mt-button type="primary" @click.native="login" class="btn-large">登录</mt-button>
     </section>
   </div>
 </template>

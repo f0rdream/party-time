@@ -47,6 +47,8 @@ a {
   border : 2px solid rgb(255,35,61);
   background: rgb(232,232,232);
   color: rgb(255,35,61);
+  display: block;
+  margin: 20px auto 0 auto;
 }
 
 

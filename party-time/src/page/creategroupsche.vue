@@ -7,7 +7,8 @@
     <section class="main-part">
       <section>
         <mt-field label="名称" placeholder="请输入事件名称" v-model="affair.title"></mt-field>
-        <mt-field label="地点" placeholder="请输入事件地点" v-model="affair.detail"></mt-field>
+        <mt-field label="内容" placeholder="请输入事件内容" v-model="affair.detail"></mt-field>
+        <mt-field label="地点" placeholder="请输入事件地点" v-model="affair.location"></mt-field>
         <mt-field label="开始时间" placeholder="请输入开始时间" v-model="showStart" @click.native="showPickerStart"></mt-field>
         <mt-field label="结束时间" placeholder="请输入结束时间" v-model="showEnd" @click.native="showPickerEnd"></mt-field>
       </section>
@@ -45,7 +46,8 @@
           title: '',
           detail: '',
           start_time: '',
-          end_time: ''
+          end_time: '',
+          location: ''
         }
       }
     },
@@ -62,7 +64,7 @@
           (this.pickerend.getHours() < 10 ? '0' + this.pickerend.getHours() : this.pickerend.getHours()) + ':' +
           (this.pickerend.getMinutes() < 10 ? '0' + this.pickerend.getMinutes() : this.pickerend.getMinutes()) + ':00Z'
         this.$http.post('group-agenda/' + this.group_id + '/post2', this.affair).then(res => {
-          if (res.title) {
+          if (res.body.title) {
             Toast('你已经创建任务' + res.title)
           }
         })
