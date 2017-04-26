@@ -34,7 +34,7 @@
     methods: {
       quitGroup: function () {
         this.$http.get('accounts/' + this.group_id + '/remove-group').then(res => {
-          if (res.groups) {
+          if (res.body.groups) {
             Toast('你已经成功退出该群')
           }
         })
