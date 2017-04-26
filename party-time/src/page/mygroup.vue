@@ -5,7 +5,7 @@
       <mt-button @click="$router.push('creategroup')" slot="right" icon="back"></mt-button>
     </mt-header>
     <section class="main-part">
-      <div class="group" v-for="group in groups" @click.native="choose(group.id)">
+      <div class="group" v-for="group in groups" @click="choose(group.id)">
         <img :src="group.picture" class="group-left"/>
         <div class="group-right">
           <p>{{group.name}}</p>
@@ -13,13 +13,14 @@
         </div>
       </div>
     </section>
-    <img src="../img/add.png" class="add" @click="creategroup"/>
+    <div>
+      <img src="../img/add.png" class="add" @click="creategroup"/>
+    </div>
     <tab-bar select-item="群组" fixed-props="true"></tab-bar>
   </div>
 </template>
 
 <script>
-  import { setMap } from '../config/store'
   import TabBar from '../components/TabBar'
   export default {
     components: {
@@ -28,7 +29,7 @@
     data () {
       return {
         groupId: [],
-        groups: [{id: '001', picture: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493043744598&di=830b5dfaa6b0d3106c8d6064587c0a76&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F010af65688bc4532f8759f04ff06e8.jpg', name: 'lala', description: 'this is lala'}]
+        groups: [{id: '001', picture: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493043744598&di=830b5dfaa6b0d3106c8d6064587c0a76&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%.jpg', name: 'lala', description: 'this is lala'}]
       }
     },
     methods: {
@@ -37,7 +38,7 @@
         window.location.href = '../creategroup'
       },
       choose: function (groupId) {
-        setMap('group_id', groupId)
+        localStorage.group_id = groupId
       }
     },
     mounted () {
@@ -83,10 +84,10 @@
   margin:0px;
 }
 .group p:first-child{
-  font-size:20px;
+  font-size:2rem;
 }
 .group p:nth-child(2){
-  font-size:15px;
+  font-size:1.5rem;
 }
 .add{
   width:70px;
@@ -96,4 +97,5 @@
   margin-left: 50%;
   transform: translateX(-50%);
 }
+
 </style>
