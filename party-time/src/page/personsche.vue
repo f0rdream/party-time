@@ -1,11 +1,12 @@
 <template>
   <div class="app-wrapper">
     <mt-header title="第4周" class="header">
-      <mt-button @click="$router.push('mygroup')" slot="left" icon="back">群组</mt-button>
-      <mt-button slot="right" @click="$router.push('person')">
-        <img src="../assets/add.svg" slot="icon" height="20" width="20">
+      <mt-button slot="right" @click="$router.push('addsche')">
+        <i class="iconm--plus" slot="icon"></i>
       </mt-button>
-      <mt-button icon="more" slot="right" @click="$router.push('person')"></mt-button>
+      <mt-button slot="right" @click="$router.push('person')">
+        <img src="../assets/personal.svg" height="30" width="30" slot="icon" class="person-icon">
+      </mt-button>
     </mt-header>
     <section class="main-part">
       <div class="col-day col-time">
@@ -17,11 +18,19 @@
       </div>
       <div class="col-day" v-for="(day, key, index) in responseData">
         <div class="tbl-label">{{dayLabel[index]}}</div>
-        <div v-for="event in day" :style="getPosition(event.start_time, event.end_time)" class="day-cell">
-
+        <div v-for="(eventI, index) in day" :style="getPosition(eventI.start_time, eventI.end_time)" class="day-cell" @click="togglePopup(key, index, $event)">
         </div>
       </div>
     </section>
+    <mt-popup v-model="popupVisible" class="modal-pop">
+      <h3 class="modal-title">{{popupContent.title}}</h3>
+      <p class="modal-detail">{{popupContent.detail}}</p>
+      <p class="modal-detail">{{popupContent.start_time}}</p>
+      <p class="modal-detail">{{popupContent.end_time}}</p>
+      <div class="modal-btn">
+        <mt-button @click.native="deleteTask(popupContent.id)" type="danger">删除任务</mt-button>
+      </div>
+    </mt-popup>
   </div>
 </template>
 
@@ -32,6 +41,8 @@
     data () {
       return {
         groupId: '',
+        popupVisible: false,
+        popupContent: {},
         timeData: ['6:00-8:00', '8:00-10:00', '10:00-12:00', '12:00-14:00', '14:00-16:00', '16:00-18:00', '18:00-20:00', '20:00-22:00'],
         responseData: {
           'second_day': [
@@ -191,9 +202,6 @@
         }
       }
     },
-    mounted () {
-      this.init()
-    },
     computed: {
       dayLabel: function () {
         let now = new Date()
@@ -212,7 +220,26 @@
     methods: {
       init () {
         this.$http.get('tasks/week-list/').then(res => {
-          // this.responseData = res.body
+          // res.body.forEach(day => {
+          //   day.forEach(event => {
+          //     event.toggle = false
+          //   })
+          // })
+          this.responseData = res.body
+          // for (let day in this.responseData) {
+          //   if (this.responseData.hasOwnProperty(day)) {
+          //     day = this.responseData[day]
+          //     for (let index in day) {
+          //       // console.log(day[index])
+          //       day[index].togglePop = false
+          //     }
+          //   }
+          // }
+          // this.responseData.forEach(day => {
+          //   day.forEach(event => {
+          //     event.toggle = false
+          //   })
+          // })
         }, res => {
           Toast({
             message: '获取信息失败',
@@ -263,7 +290,28 @@
           height: `${length}%`,
           background: `rgb(${254 - lengthLevel * 5}, ${185 - lengthLevel * 18}, ${185 - lengthLevel * 18})`
         }
+      },
+      togglePopup (key, index, event) {
+        let startArr, endArr
+        this.popupContent = Object.assign({}, this.responseData[key][index])
+        this.popupVisible = !this.popupVisible
+        function getTime (timeString) {
+          return timeString.split(/-|Z|T/)
+        }
+        startArr = getTime(this.popupContent.start_time)
+        endArr = getTime(this.popupContent.end_time)
+        this.popupContent.start_time = startArr[1] + '月' + startArr[2] + '日' + startArr[3]
+        this.popupContent.end_time = endArr[1] + '月' + endArr[2] + '日' + endArr[3]
+      },
+      deleteTask (id) {
+        this.$http.delete(`tasks/${id}/delete`).then(res => {
+          this.popupVisible = false
+        }, res => { this.popupVisible = false })
+        this.init()
       }
+    },
+    mounted () {
+      this.init()
     }
   }
 
@@ -304,6 +352,11 @@
     border-top: 1px solid #494351;
     box-sizing: border-box;
   }
+
+  .col-time .tbl-time {
+    display: inline-block;
+    margin: 0.5rem 0;
+  }
   .main-part .tbl-label {
     flex: 0 1 3rem;
     border-top: none;
@@ -320,9 +373,29 @@
   .col-day {
     position: relative;
   }
+
+  .col-time .tbl-cell:nth-child(2) {
+    border-top: none;
+  }
   .col-time .tbl-cell:last-child {
     display: inline-flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  .iconm--plus {
+    transform: scale(0.8, 0.8);
+  }
+
+  .modal-pop {
+    padding: 1rem;
+  }
+  .modal-btn {
+    text-align: center;
+  }
+  .person-icon {
+    vertical-align: middle;
+    box-sizing: border-box;
+    padding: 0.2rem;
   }
 </style>

@@ -3,7 +3,7 @@
   vertical-align: middle;
   position: relative;
   font-style: normal;
-  color: #ddd;
+  color: #fff;
   text-align: left;
   text-indent: -9999px;
   direction: ltr;
@@ -11,22 +11,24 @@
 }
 
 .iconm--plus {
-
+  width: 3rem;
+  height: 3rem;
+  margin: 0.2rem;
 }
-.iconm--plus::before .iconm--plus::after {
-  content: '';
-  display: inline-block;
+.iconm--plus::before, .iconm--plus::after                                                                                        {
+  content: ' ';
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: inset 3px 14px 0 32px;
+  box-shadow: inset 0 0 0 32px;
+  pointer-events: none;
 }
 .iconm--plus::before {
-  width: 20px;
-  height: 2px;
+  width: 2rem;
+  height: 0.2rem;
 }
 .iconm--plus::after {
-  height: 20px;
-  width: 2px;
+  height: 2rem;
+  width: 0.2rem;
 }
