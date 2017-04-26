@@ -40,6 +40,7 @@ a {
 
 /*From Wang Yang*/
 .btn-large {
+  box-sizing: border-box;
   height: 4rem;
   width: 24rem;
   border-radius:4rem;
@@ -61,5 +62,5 @@ a {
 margin-top:1rem;
 }
 .mint-tab-container{
-  background:rgb(232,232,232) ;
+  background: rgb(232,232,232) ;
 }

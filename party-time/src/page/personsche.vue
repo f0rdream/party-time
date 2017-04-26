@@ -2,7 +2,9 @@
   <div class="app-wrapper">
     <mt-header title="第4周" class="header">
       <mt-button @click="$router.push('mygroup')" slot="left" icon="back">群组</mt-button>
-      <mt-button icon="more" slot="right" @click="$router.push('person')"></mt-button>
+      <mt-button slot="right" @click="$router.push('person')">
+        <img src="../assets/add.svg" slot="icon" height="20" width="20">
+      </mt-button>
       <mt-button icon="more" slot="right" @click="$router.push('person')"></mt-button>
     </mt-header>
     <section class="main-part">

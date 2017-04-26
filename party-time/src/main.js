@@ -7,6 +7,7 @@ import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import './style/common.css'
 import './config/resource'
+import './style/iconme.css'
 
 Vue.config.productionTip = false
 
