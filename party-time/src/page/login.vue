@@ -13,7 +13,11 @@
       <mt-field label="密码" placeholder="请输入密码" v-model="form.password" type="password"></mt-field>
       <div class="cell-box">
         <check-box checkValue="remembered" label="记住登录" v-model="form.remembered"></check-box>
-        <router-link to="/forgotten" class="">忘记密码</router-link>
+        <router-link to="/forgotten" class="" hidden>忘记密码</router-link>
+      </div>
+      <div class="middle-box cell-part">
+        <mt-button type="primary" @click.native="login" class="btn-large">登录</mt-button>
+        <router-link to="register" class="text-info">没有账号?注册</router-link>
       </div>
       <mt-button type="primary" @click.native="login" class="btn-large">登录</mt-button>
     </section>
@@ -69,7 +73,7 @@
 <style scoped>
   .icon-part {
     display: flex;
-    height: 30rem;
+    height: 24rem;
   }
   .icon-box {
     margin: auto;
@@ -77,5 +81,13 @@
   .icon-box img {
     width: 10rem;
     height: 10rem;
+  }
+  .cell-part {
+    margin-top: 5rem;
+  }t
+  .text-info {
+    margin-top: 1rem;
+    color: #9c9c9c;
+    font-size: 1.2rem;
   }
 </style>

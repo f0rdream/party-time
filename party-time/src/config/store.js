@@ -1,13 +1,4 @@
-let storeMap = new Map()
+import Vue from 'vue'
 
-storeMap.set('username', '')
-storeMap.set('isLogin', false)
-
-function setMap (key, value) {
-  storeMap.set(key, value)
-}
-function getMap (key) {
-  return storeMap.has(key) ? storeMap.get(key) : window.console.log('Undefined key!')
-}
-
-export { setMap, getMap }
+let bus = new Vue()
+export default bus

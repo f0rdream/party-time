@@ -89,7 +89,6 @@ class UserUpdateAPIView(APIView):
             serializer.save()
             return Response(serializer.data, status=HTTP_200_OK)
 
-
     def patch(self, request, *args, **kwargs):
         data = request.data
         user_profile = self.get_object()
