@@ -27,21 +27,32 @@
     data () {
       return {
         groupName: '',
-        groupDetail: ''
+        groupDetail: '',
+        addPerson: []
       }
     },
     methods: {
       create () {
-        console.log(this.groupName)
         this.$http.post('groupagenda/group/create/', {'group name': this.groupName, 'description': this.groupDetail}).then(res => {
           if (res.body.name) {
             this.Toast('你已经创建群组' + res.body.name)
           }
+        }, res => {
         })
       },
       navigator () {
+        localStorage.groupName = this.groupName
+        localStorage.groupDetail = this.groupDetail
         window.location.href = '../addperson'
       }
+    },
+    mounted () {
+      this.groupName = localStorage.groupName || ''
+      this.groupDetail = localStorage.groupDetail || ''
+      this.addPerson = localStorage.addList || []
+      localStorage.removeItem('groupName')
+      localStorage.removeItem('groupDetail')
+      localStorage.removeItem('addList')
     }
   }
 </script>

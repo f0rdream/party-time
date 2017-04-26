@@ -88,22 +88,30 @@
           (this.pickerend.getHours() < 10 ? '0' + this.pickerend.getHours() : this.pickerend.getHours()) + ':' +
           (this.pickerend.getMinutes() < 10 ? '0' + this.pickerend.getMinutes() : this.pickerend.getMinutes()) + ':00Z'
         this.$http.post('tasks/create', this.affair).then(res => {
-          if (res.title) {
-            Toast('你已经创建任务' + res.title)
+          if (res.body.title) {
+            Toast('你已经创建任务' + res.body.title)
           }
         })
       },
       login () {
         this.$http.get('/courses/yzm').then(res => {
-          if (res.yzm_cookie) {
-            this.person.yzm_cookie = res.yzm_cookie
+          if (res.body.yzm_cookie) {
+            this.person.yzm_cookie = res.body.yzm_cookie
           }
-          if (res.yzm_url) {
-            this.person.yzm_url = res.yzm_url
+          if (res.body.yzm_url) {
+            this.person.yzm_url = res.body.yzm_url
           }
         })
         this.$http.post('/courses/', this.student).then(res => {
-
+          if (res.body) {
+            window.open('../msgcenter')
+          }
+        }, res => {
+          Toast({
+            message: '登陆失败',
+            position: 'bottom',
+            duration: 2000
+          })
         })
       },
       showPickerStart () {
