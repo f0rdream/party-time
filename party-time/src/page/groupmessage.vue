@@ -12,6 +12,13 @@
         <mt-cell title="群名称" :value="group"></mt-cell>
         <mt-cell title="群简介" :value="description" class="description"></mt-cell>
       </section>
+      <section class="person-block">
+        <p>群成员</p>
+        <div class="person-list">
+          <img :src="img" v-for="img in imgList"/>
+          <img src="../img/add.png" class="add" @click="navigator"/>
+        </div>
+      </section>
       <section>
         <mt-button type="default" class="btn-large" @click.native="quitGroup">退出群组</mt-button>
       </section>
@@ -20,7 +27,6 @@
 </template>
 
 <script>
-  import { getMap } from '../config/store'
   import { Toast } from 'mint-ui'
   export default {
     data () {
@@ -28,7 +34,8 @@
         groupId: '',
         picture: '',
         group: '',
-        description: ''
+        description: '',
+        imgList: []
       }
     },
     methods: {
@@ -39,12 +46,14 @@
           }
         })
       },
-      getPosition: function () {
-
+      navigator () {
+        localStorage.groupName = this.groupName
+        localStorage.groupDetail = this.groupDetail
+        window.location.href = '../addperson'
       }
     },
     mounted () {
-      this.groupId = getMap('group_id')
+      this.groupId = localStorage.groupId
       this.$http.get('group-agenda/' + this.groupId + '/group-profile/').then(res => {
         this.picture = res.picture
         this.group = res.group
@@ -72,5 +81,22 @@
   .btn-large{
     display: block;
     margin: 20px auto 0 auto;
+  }
+  .person-block{
+    background:white
+  }
+  .person-block p{
+    margin-left:1rem;
+    font-size:2rem;
+  }
+  .person-list{
+    display:  flex;
+
+  }
+  .person-list img,.add{
+    width: 50px;
+    height: 50px;
+    border-radius:25px;
+    margin:2rem 1rem;
   }
 </style>i
