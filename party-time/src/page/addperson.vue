@@ -52,18 +52,23 @@
       },
       notChecked: function (user) {
         user.isChecked = false
-        this.addList.splice(this.addList.indexOf(user.id), 1)
+        this.addList.splice(this.addList.indexOf(user.username), 1)
         console.log(this.addList)
       },
       checked: function (user) {
         user.isChecked = true
-        this.addList.push(user.id)
+        this.addList.push(user.username)
         console.log(this.addList)
       },
       ready: function () {
-        localStorage.addList = JSON.stringify(this.addList)
-        this.$store.commit('setAddList', this.addList)
-        window.history.back(-1)
+        groupId = localStorage.group_id
+        this.$http.get('http://127.0.0.1:8000/accounts/add-group/' + this.addList[0] + '/' + groupId + '/').then(res =>{
+          Toast({
+            message: '成功添加',
+            position: 'bottom',
+            duration: 2000
+          })
+        })
       }
     },
     mounted () {

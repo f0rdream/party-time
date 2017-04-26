@@ -16,6 +16,7 @@
         <p>群成员</p>
         <div class="person-list">
           <img :src="img" v-for="img in imgList"/>
+          <img src="../img/add.png" class="add" @click="navigator"/>
         </div>
       </section>
       <section>
@@ -45,8 +46,10 @@
           }
         })
       },
-      getPosition: function () {
-
+      navigator () {
+        localStorage.groupName = this.groupName
+        localStorage.groupDetail = this.groupDetail
+        window.location.href = '../addperson'
       }
     },
     mounted () {
@@ -90,7 +93,7 @@
     display:  flex;
 
   }
-  .person-list img{
+  .person-list img,.add{
     width: 50px;
     height: 50px;
     border-radius:25px;

@@ -40,11 +40,6 @@
         }, res => {
         })
       },
-      navigator () {
-        localStorage.groupName = this.groupName
-        localStorage.groupDetail = this.groupDetail
-        window.location.href = '../addperson'
-      }
     },
     mounted () {
       this.groupName = localStorage.groupName || ''
