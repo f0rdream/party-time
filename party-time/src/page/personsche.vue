@@ -22,6 +22,7 @@
         </div>
       </div>
     </section>
+    <tab-bar select-item="个人"></tab-bar>
     <mt-popup v-model="popupVisible" class="modal-pop">
       <h3 class="modal-title">{{popupContent.title}}</h3>
       <p class="modal-detail">{{popupContent.detail}}</p>
@@ -36,8 +37,10 @@
 
 <script>
   import { Toast } from 'mint-ui'
+  import TabBar from '@/components/TabBar'
 
   export default {
+    components: { TabBar },
     data () {
       return {
         groupId: '',

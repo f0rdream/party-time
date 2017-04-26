@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header title="登录">
-      <mt-button @click="$router.go(-1)" slot="left" icon="back"></mt-button>
+      <mt-button @click="$router.push('personsche')" slot="left" icon="back"></mt-button>
     </mt-header>
     <section class="icon-part">
       <div class="icon-box">

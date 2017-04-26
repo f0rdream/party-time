@@ -1,7 +1,7 @@
 <template>
   <div>
     <mt-header title="个人信息">
-      <mt-button slot="left" @click="$router.push('mygroup')" icon="back"><span>群组</span></mt-button>
+      <mt-button slot="left" @click="$router.go(-1)" icon="back"></mt-button>
       <mt-button slot="right" @click="editDone"><span>{{ editable ? '完成' : '编辑'}}</span></mt-button>
     </mt-header>
     <section class="icon-part">
