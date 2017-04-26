@@ -55,10 +55,17 @@
       }
     },
     mounted () {
-      this.groupId = localStorage.groupId
+      this.groupId = localStorage.group_id
       this.$http.get('group-agenda/' + this.groupId + '/group-profile/').then(res => {
-        this.picture = res.picture
-        this.group = res.group
+        this.picture = res.body.picture
+        this.group = res.body.group
+      })
+      this.$http.get('http://127.0.0.1:8000/group-agenda/group/?' + 'search=' + this.group + '/').then(res => {
+        res.body.users.forEach(function(val, index) {
+          this.$http.get('http://127.0.0.1:8000/accounts/' + val + '/load-picture/').then(res => {
+              imgList.push(res.body.picture)
+          })
+        })
       })
     }
 
