@@ -7,7 +7,6 @@
 </template>
 
 <script>
-  import { setMap } from './config/store'
   export default {
     name: 'app',
     mounted () {
@@ -16,9 +15,7 @@
     methods: {
       isLogin () {
         this.$http.get('accounts/is-login/').then(res => {
-          if (res.data) {
-            setMap('isLogin', true)
-          } else {
+          if (!res.data) {
             this.$router.push('login')
           }
         }, res => {

@@ -39,8 +39,8 @@
               'id': 15,
               'user': 'djangotest',
               'title': 'abcabcabc',
-              'start_time': '2017-04-25T01:00:00Z',
-              'end_time': '2017-12-31T12:59:00Z',
+              'start_time': '2017-04-25T08:02:00Z',
+              'end_time': '2017-04-25T12:59:00Z',
               'is_past': false
             },
             {
@@ -49,8 +49,8 @@
               'id': 16,
               'user': 'djangotest',
               'title': 'gdsfgdsgdf',
-              'start_time': '2017-04-25T01:02:00Z',
-              'end_time': '2017-12-31T12:59:00Z',
+              'start_time': '2017-04-25T08:02:00Z',
+              'end_time': '2017-04-25T12:59:00Z',
               'is_past': false
             }
           ],
@@ -61,8 +61,8 @@
               'id': 15,
               'user': 'djangotest',
               'title': 'abcabcabc',
-              'start_time': '2017-04-25T01:00:00Z',
-              'end_time': '2017-12-31T12:59:00Z',
+              'start_time': '2017-04-25T08:02:00Z',
+              'end_time': '2017-04-25T12:59:00Z',
               'is_past': false
             },
             {
@@ -71,8 +71,8 @@
               'id': 16,
               'user': 'djangotest',
               'title': 'gdsfgdsgdf',
-              'start_time': '2017-04-25T01:02:00Z',
-              'end_time': '2017-12-31T12:59:00Z',
+              'start_time': '2017-04-25T08:02:00Z',
+              'end_time': '2017-04-25T12:59:00Z',
               'is_past': false
             }
           ],
@@ -83,8 +83,8 @@
               'id': 15,
               'user': 'djangotest',
               'title': 'abcabcabc',
-              'start_time': '2017-04-25T01:00:00Z',
-              'end_time': '2017-12-31T12:59:00Z',
+              'start_time': '2017-04-25T08:02:00Z',
+              'end_time': '2017-04-25T12:59:00Z',
               'is_past': false
             },
             {
@@ -93,8 +93,8 @@
               'id': 16,
               'user': 'djangotest',
               'title': 'gdsfgdsgdf',
-              'start_time': '2017-04-25T01:02:00Z',
-              'end_time': '2017-12-31T12:59:00Z',
+              'start_time': '2017-04-25T08:02:00Z',
+              'end_time': '2017-04-25T12:59:00Z',
               'is_past': false
             }
           ],
@@ -105,8 +105,8 @@
               'id': 15,
               'user': 'djangotest',
               'title': 'abcabcabc',
-              'start_time': '2017-04-25T01:00:00Z',
-              'end_time': '2017-12-31T12:59:00Z',
+              'start_time': '2017-04-25T08:02:00Z',
+              'end_time': '2017-04-25T12:59:00Z',
               'is_past': false
             },
             {
@@ -115,8 +115,8 @@
               'id': 16,
               'user': 'djangotest',
               'title': 'gdsfgdsgdf',
-              'start_time': '2017-04-25T01:02:00Z',
-              'end_time': '2017-12-31T12:59:00Z',
+              'start_time': '2017-04-25T08:02:00Z',
+              'end_time': '2017-04-25T12:59:00Z',
               'is_past': false
             }
           ],
@@ -127,8 +127,8 @@
               'id': 15,
               'user': 'djangotest',
               'title': 'abcabcabc',
-              'start_time': '2017-04-25T01:00:00Z',
-              'end_time': '2017-12-31T12:59:00Z',
+              'start_time': '2017-04-25T08:02:00Z',
+              'end_time': '2017-04-25T12:59:00Z',
               'is_past': false
             },
             {
@@ -137,8 +137,8 @@
               'id': 16,
               'user': 'djangotest',
               'title': 'gdsfgdsgdf',
-              'start_time': '2017-04-25T01:02:00Z',
-              'end_time': '2017-12-31T12:59:00Z',
+              'start_time': '2017-04-25T08:02:00Z',
+              'end_time': '2017-04-25T12:59:00Z',
               'is_past': false
             }
           ],
@@ -149,8 +149,8 @@
               'id': 15,
               'user': 'djangotest',
               'title': 'abcabcabc',
-              'start_time': '2017-04-25T01:00:00Z',
-              'end_time': '2017-12-31T12:59:00Z',
+              'start_time': '2017-04-25T08:02:00Z',
+              'end_time': '2017-04-25T12:59:00Z',
               'is_past': false
             },
             {
@@ -159,8 +159,8 @@
               'id': 16,
               'user': 'djangotest',
               'title': 'gdsfgdsgdf',
-              'start_time': '2017-04-25T01:02:00Z',
-              'end_time': '2017-12-31T12:59:00Z',
+              'start_time': '2017-04-25T08:02:00Z',
+              'end_time': '2017-04-25T12:59:00Z',
               'is_past': false
             }
           ],
@@ -171,8 +171,8 @@
               'id': 15,
               'user': 'djangotest',
               'title': 'abcabcabc',
-              'start_time': '2017-04-25T01:00:00Z',
-              'end_time': '2017-12-31T12:59:00Z',
+              'start_time': '2017-04-25T08:02:00Z',
+              'end_time': '2017-04-25T12:59:00Z',
               'is_past': false
             },
             {
@@ -181,8 +181,8 @@
               'id': 16,
               'user': 'djangotest',
               'title': 'gdsfgdsgdf',
-              'start_time': '2017-04-25T01:02:00Z',
-              'end_time': '2017-12-31T12:59:00Z',
+              'start_time': '2017-04-25T08:02:00Z',
+              'end_time': '2017-04-25T12:59:00Z',
               'is_past': false
             }
           ]
@@ -236,22 +236,30 @@
       },
       getPosition (startTime, endTime) {
         // let style = {}
-        const totalMin = (22 - 6) * 60
+        const START = 6
+        const END = 22
+        const totalMin = (END - START) * 60
         function getJSTime (time) {
-          return new Date(
-            time.split(/-|T|Z/).forEach(item => { item + '' }
-            )
-          )
+          let newDate = ''
+          time.split(/-|T|Z/).forEach(item => { newDate += `${item} ` })
+          return new Date(newDate)
         }
-        let length = (getJSTime(startTime).getTime() - getJSTime(endTime).getTime()) / 1000 / 60 / totalMin
-        let startPos = (getJSTime(startTime).getTime / 1000 / 60) / totalMin
+        startTime = getJSTime(startTime)
+        endTime = getJSTime(endTime)
+        // if (startTime.getHours < 6 || endTime.getHours > 22) {
+        //   return {
+        //     display: 'none'
+        //   }
+        // }
+        let length = (endTime.getTime() - startTime.getTime()) / 1000 / 60 / totalMin * 100
+        let startPos = ((startTime.getHours() - START) * 60 + startTime.getMinutes()) / totalMin * 100
         console.log(length)
         console.log(startPos)
         // style.length = `${length}%`
         // style.top =
         return {
           top: `${startPos}%`,
-          length: `${length}%`
+          height: `${length}%`
         }
       }
     }
@@ -284,9 +292,14 @@
     flex: 0 1 auto;
     font-size: 1.2rem;
     color: #afafbf;
-  }
-  .col-day {
     flex-direction: column;
+    text-align: center;
+    display: flex;
+  }
+  .col-time .tbl-cell {
+    flex: 1 1 8%;
+    border-top: 1px solid #494351;
+    box-sizing: border-box;
   }
   .main-part .tbl-label {
     flex: 0 1 3rem;
@@ -294,5 +307,4 @@
     font-size: 1.2rem;
     color: #afafbf;
   }
-
 </style>
