@@ -1,8 +1,13 @@
 <template>
   <div class="app-wrapper">
-    <mt-header title="第4周" class="header">
+    <mt-header title="群组日程" class="header">
       <mt-button @click="$router.push('mygroup')" slot="left" icon="back">群组</mt-button>
-      <mt-button icon="more" slot="right" @click="$router.push('groupmessage')"></mt-button>
+      <mt-button slot="right" @click="$router.push('creategroupsche')">
+        <i class="iconm--plus" slot="icon"></i>
+      </mt-button>
+      <mt-button slot="right" @click="$router.push('groupmessage')">
+        <img src="../assets/personal.svg" height="30" width="30" slot="icon" class="person-icon">
+      </mt-button>
     </mt-header>
     <section class="main-part">
       <div class="col-day col-time">
@@ -23,7 +28,6 @@
 </template>
 
 <script>
-  import { getMap } from '../config/store'
   import { Toast } from 'mint-ui'
 
   export default {
@@ -106,9 +110,6 @@
         }           /* Add default responseData data in case get failed */
       }
     },
-    mounted () {
-      this.init()
-    },
     computed: {
       timeData: function () {
         let timeData = []
@@ -138,7 +139,7 @@
     },
     methods: {
       init () {
-        this.groupId = getMap('groupId')
+        this.groupId = localStorage.group_id
         if (this.groupId) {
           this.$http.get(`group-agenda/${this.groupId}/number/`).then(res => {
             delete res.body.name
@@ -170,6 +171,9 @@
         }
         return style
       }
+    },
+    mounted () {
+      this.init()
     }
   }
 

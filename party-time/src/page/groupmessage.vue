@@ -2,7 +2,9 @@
   <div>
     <mt-header title="群组信息">
       <mt-button @click="$router.go(-1)" slot="left" icon="back"></mt-button>
-      <mt-button icon="more" slot="right" @click="$router.push('creategroupsche')"></mt-button>
+      <mt-button slot="right" @click="$router.push('creategroupsche')">
+        <i class="iconm--plus" slot="icon" height="30" width="30"></i>
+      </mt-button>
     </mt-header>
     <section class="main-part">
       <section class="centerSection">
@@ -98,5 +100,9 @@
     height: 50px;
     border-radius:25px;
     margin:2rem 1rem;
+  }
+
+  .iconm--plus {
+    transform: scale(0.8, 0.8);
   }
 </style>i

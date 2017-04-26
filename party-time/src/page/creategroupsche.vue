@@ -45,7 +45,7 @@
           title: '',
           detail: '',
           start_time: '',
-          end_time: '',
+          end_time: ''
         }
       }
     },

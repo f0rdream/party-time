@@ -61,8 +61,8 @@
         console.log(this.addList)
       },
       ready: function () {
-        groupId = localStorage.group_id
-        this.$http.get('http://127.0.0.1:8000/accounts/add-group/' + this.addList[0] + '/' + groupId + '/').then(res =>{
+        let groupId = localStorage.group_id
+        this.$http.get('http://127.0.0.1:8000/accounts/add-group/' + this.addList[0] + '/' + groupId + '/').then(res => {
           Toast({
             message: '成功添加',
             position: 'bottom',

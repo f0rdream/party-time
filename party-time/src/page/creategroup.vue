@@ -39,7 +39,7 @@
           }
         }, res => {
         })
-      },
+      }
     },
     mounted () {
       this.groupName = localStorage.groupName || ''

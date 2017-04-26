@@ -1,6 +1,6 @@
 <template>
   <div class="app-wrapper">
-    <mt-header title="第4周" class="header">
+    <mt-header title="个人日程" class="header">
       <mt-button slot="right" @click="$router.push('addsche')">
         <i class="iconm--plus" slot="icon"></i>
       </mt-button>

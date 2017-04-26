@@ -28,7 +28,6 @@
   import { Indicator, Toast } from 'mint-ui'
   import Router from '../router'
   import CheckBox from '../components/common/CheckBox'
-  import { setMap } from '../config/store'
 
   export default {
     components: {
@@ -49,7 +48,6 @@
         Indicator.open('正在登陆...')
         this.$http.post('accounts/login/', this.form).then(res => {
           Indicator.close()
-          setMap('isLogin', true)
           Router.go(-1)
         }, res => {
           Indicator.close()
