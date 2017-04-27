@@ -37,13 +37,32 @@
     methods: {
       register () {
         this.wait = true
-        this.$http.post('accounts/register/', this.form).then(res => {
-          window.console.log('It\'s OK:' + res.body)
-          this.wait = false
-        }, res => {
-          window.console.log('Error happend:' + res.body)
-          this.wait = false
-        })
+        if (this.getCsrf()) {
+          this.$http.post('accounts/register/', this.form, {headers: {
+            'X-CSRFToken': localStorage.csrftoken
+          }}).then(res => {
+            window.console.log('It\'s OK:' + res.body)
+            this.wait = false
+          }, res => {
+            window.console.log('Error happend:' + res.body)
+            this.wait = false
+          })
+        } else {
+          this.$http.post('accounts/register/', this.form).then(res => {
+            window.console.log('It\'s OK:' + res.body)
+            this.wait = false
+          }, res => {
+            window.console.log('Error happend:' + res.body)
+            this.wait = false
+          })
+        }
+      },
+      getCsrf () {
+        if (localStorage.csrftoken) {
+          return localStorage.csrftoken
+        } else {
+          return false
+        }
       }
     }
 

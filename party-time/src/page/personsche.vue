@@ -307,7 +307,9 @@
         this.popupContent.end_time = endArr[1] + '月' + endArr[2] + '日' + endArr[3]
       },
       deleteTask (id) {
-        this.$http.delete(`tasks/${id}/delete`).then(res => {
+        this.$http.delete(`tasks/${id}/delete`, {headers: {
+          'X-CSRFToken': localStorage.csrftoken
+        }}).then(res => {
           this.popupVisible = false
         }, res => { this.popupVisible = false })
         this.init()

@@ -162,7 +162,8 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = (
     'google.com',
     'localhost:8000',
-    '127.0.0.1:9000'
+    '127.0.0.1:9000',
+    'nodeapp:2333'
 )
 
 CORS_ALLOW_CREDENTIALS = True

@@ -33,7 +33,9 @@
     },
     methods: {
       create () {
-        this.$http.post('group-agenda/group/create/', {'group name': this.groupName, 'description': this.groupDetail}).then(res => {
+        this.$http.post('group-agenda/group/create/', {'group name': this.groupName, 'description': this.groupDetail}, {headers: {
+          'X-CSRFToken': localStorage.csrftoken
+        }}).then(res => {
           if (res.body.name) {
             this.Toast('你已经创建群组' + res.body.name)
           }

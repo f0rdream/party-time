@@ -9,9 +9,6 @@
 <script>
   export default {
     name: 'app',
-    mounted () {
-      this.isLogin()
-    },
     methods: {
       isLogin () {
         this.$http.get('accounts/is-login/').then(res => {
@@ -22,7 +19,19 @@
           this.$router.push('login')
           window.console.log('Failed for some reasons')
         })
+      },
+      getCsrf () {
+        let cookie = window.document.cookie.match('(^|;) ?' + 'csrftoken' + '=([^;]*)(;|$)')
+        let csrftoken = ''
+        if (cookie) {
+          csrftoken = cookie[2]
+        }
+        localStorage.csrftoken = csrftoken
       }
+    },
+    mounted () {
+      this.isLogin()
+      this.getCsrf()
     }
   }
 </script>

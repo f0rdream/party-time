@@ -45,18 +45,35 @@
     methods: {
       login () {
         Indicator.open('正在登陆...')
-        this.$http.post('accounts/login/', this.form).then(res => {
-          Indicator.close()
-          Router.go(-1)
-        }, res => {
-          Indicator.close()
-          Toast({
-            message: '登陆失败',
-            position: 'bottom',
-            duration: 2000
+        if (this.getCsrf()) {
+          this.$http.post('accounts/login/', this.form, {headers: {
+            'X-CSRFToken': localStorage.csrftoken
+          }}).then(res => {
+            Indicator.close()
+            Router.go(-1)
+          }, res => {
+            Indicator.close()
+            Toast({
+              message: '登陆失败',
+              position: 'bottom',
+              duration: 2000
+            })
+            window.console.log(res)
           })
-          window.console.log(res)
-        })
+        } else {
+          this.$http.post('accounts/login/', this.form).then(res => {
+            Indicator.close()
+            Router.go(-1)
+          }, res => {
+            Indicator.close()
+            Toast({
+              message: '登陆失败',
+              position: 'bottom',
+              duration: 2000
+            })
+            window.console.log(res)
+          })
+        }
       },
       getPic () {
         this.$http.get(`accounts/${this.form.username}/load-picture/`).then(res => {
@@ -69,6 +86,13 @@
             this.$router.push('personsche')
           }
         })
+      },
+      getCsrf () {
+        if (localStorage.csrftoken) {
+          return localStorage.csrftoken
+        } else {
+          return false
+        }
       }
     },
     mounted () {
