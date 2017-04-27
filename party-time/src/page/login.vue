@@ -19,7 +19,6 @@
         <mt-button type="primary" @click.native="login" class="btn-large">登录</mt-button>
         <router-link to="register" class="text-info">没有账号?注册</router-link>
       </div>
-      <mt-button type="primary" @click.native="login" class="btn-large">登录</mt-button>
     </section>
   </div>
 </template>
@@ -63,9 +62,18 @@
         this.$http.get(`accounts/${this.form.username}/load-picture/`).then(res => {
           this.picURI = res.body.picture
         })
+      },
+      isLogin () {
+        this.$http.get('accounts/is-login/').then(res => {
+          if (res.ok) {
+            this.$router.push('personsche')
+          }
+        })
       }
+    },
+    mounted () {
+      this.isLogin()
     }
-
   }
 </script>
 <style scoped>

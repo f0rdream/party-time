@@ -2,7 +2,6 @@
   <div>
     <mt-header title="我的群组">
       <mt-button @click="$router.go(-1)" slot="left" icon="back"></mt-button>
-      <mt-button @click="$router.push('creategroup')" slot="right" icon="back"></mt-button>
     </mt-header>
     <section class="main-part">
       <div class="group" v-for="group in groups" @click="choose(group.id)">
@@ -16,7 +15,7 @@
     <div>
       <img src="../img/add.png" class="add" @click="creategroup"/>
     </div>
-    <tab-bar select-item="群组" fixed-props="true"></tab-bar>
+    <tab-bar select-item="群组" :fixed-props="true"></tab-bar>
   </div>
 </template>
 
@@ -35,10 +34,11 @@
     methods: {
       creategroup: function () {
         console.log('click')
-        window.location.href = '../creategroup'
+        this.$router.push('creategroup')
       },
       choose: function (groupId) {
         localStorage.group_id = groupId
+        this.$router.push('sche')
       }
     },
     mounted () {

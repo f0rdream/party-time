@@ -12,8 +12,8 @@
         <mt-tab-container v-model="selected">
           <mt-tab-container-item id="1">
             <section>
-            <mt-field label="系统账号" placeholder="请输入系统账号" v-model="person.user_stu_id"></mt-field>
-            <mt-field label="登录密码" placeholder="请输入登录密码" v-model="person.user_stu_pwd"></mt-field>
+            <mt-field label="系统账号" placeholder="请输入系统账号" v-model="student.user_stu_id"></mt-field>
+            <mt-field label="登录密码" placeholder="请输入登录密码" v-model="student.user_stu_pwd"></mt-field>
             </section>
             <section class="button-section">
             <mt-button type="default" class="btn-large" click.native="login">登录</mt-button>
@@ -96,15 +96,15 @@
       login () {
         this.$http.get('/courses/yzm').then(res => {
           if (res.body.yzm_cookie) {
-            this.person.yzm_cookie = res.body.yzm_cookie
+            this.student.yzm_cookie = res.body.yzm_cookie
           }
           if (res.body.yzm_url) {
-            this.person.yzm_url = res.body.yzm_url
+            this.student.yzm_url = res.body.yzm_url
           }
         })
         this.$http.post('/courses/', this.student).then(res => {
-          if (res.body) {
-            window.open('../msgcenter')
+          if (res.ok) {
+            this.$router.push('personsche')
           }
         }, res => {
           Toast({
@@ -158,7 +158,6 @@
   background: rgb(232,232,232);
 }
 .main-part {
-  margin-top:4rem;
   background: rgb(232,232,232)
 }
 

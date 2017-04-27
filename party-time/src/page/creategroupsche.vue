@@ -32,7 +32,6 @@
 </template>
 
 <script>
-  import { getMap } from '../config/store'
   import { Toast } from 'mint-ui'
   export default {
     data () {
@@ -96,7 +95,6 @@
           (this.pickerend.getMinutes() < 10 ? '0' + this.pickerend.getMinutes() : this.pickerend.getMinutes())
       },
       group_id: function () {
-        return getMap('group_id')
       }
     }
   }

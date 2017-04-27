@@ -122,14 +122,11 @@
       },
       dayLabel: function () {
         let now = new Date()
-        let nowYear = now.getFullYear()
-        let nowMonth = now.getMonth()
-        let nowDate = now.getDate()
         let count = 0
         let dayLabel = []
         for (let day in this.responseData) {
           if (this.responseData.hasOwnProperty(day)) {
-            let day = new Date(`${nowYear}-${nowMonth}-${nowDate + count}`)
+            let day = new Date(now.getTime() + 24 * 60 * 60 * 1000 * count)
             dayLabel.push(day.getMonth() + '-' + day.getDate())
           }
           count++
@@ -141,7 +138,7 @@
       init () {
         this.groupId = localStorage.group_id
         if (this.groupId) {
-          this.$http.get(`group-agenda/${this.groupId}/number/`).then(res => {
+          this.$http.get(`group-agenda/${this.groupId}/number`).then(res => {
             delete res.body.name
             this.responseData = res.body
           }, res => {
@@ -160,16 +157,14 @@
         }
       },
       getStyle (num) {
-        let style = {}
-        switch (num) {
-          case 0:
-            style.borderTop = '1px solid #000'
-            break
-          default:
-            style.background = `hsl(${num * 36}, 100%, 50%)`
-            style.borderTop = 'none'
+        if (num === 0) {
+          return {
+            background: 'rgb(232, 232, 232)'
+          }
         }
-        return style
+        return {
+          background: `rgb(${254 - num * 5}, ${185 - num * 18}, ${185 - num * 18})`
+        }
       }
     },
     mounted () {

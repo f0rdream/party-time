@@ -61,9 +61,9 @@
         this.group = res.body.group
       })
       this.$http.get('http://127.0.0.1:8000/group-agenda/group/?' + 'search=' + this.group + '/').then(res => {
-        res.body.users.forEach(function(val, index) {
+        res.body.users.forEach(function (val, index) {
           this.$http.get('http://127.0.0.1:8000/accounts/' + val + '/load-picture/').then(res => {
-              imgList.push(res.body.picture)
+            this.imgList.push(res.body.picture)
           })
         })
       })
