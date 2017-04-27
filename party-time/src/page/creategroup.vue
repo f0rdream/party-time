@@ -33,7 +33,7 @@
     },
     methods: {
       create () {
-        this.$http.post('group-agenda/group/create/', {'group name': this.groupName, 'description': this.groupDetail}, {headers: {
+        this.$http.post('group-agenda/group/create/', {'name': this.groupName, 'group_profile': this.groupDetail}, {headers: {
           'X-CSRFToken': localStorage.csrftoken
         }}).then(res => {
           if (res.body.name) {
