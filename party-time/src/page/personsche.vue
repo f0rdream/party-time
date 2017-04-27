@@ -228,7 +228,9 @@
           //     event.toggle = false
           //   })
           // })
-          // this.responseData = res.body
+          if (res.body) {
+            this.responseData = res.body
+          }
           // for (let day in this.responseData) {
           //   if (this.responseData.hasOwnProperty(day)) {
           //     day = this.responseData[day]
