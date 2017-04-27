@@ -20,7 +20,7 @@
       <div class="col-day" v-for="(day, key, index) in responseData">
         <div class="tbl-label">{{dayLabel[index]}}</div>
         <div v-for="time in day" :style="getStyle(time)" class="day-cell">
-          {{time}}
+          {{ time===0 ? '': time}}
         </div>
       </div>
     </section>
@@ -206,7 +206,7 @@
   }
   .col-day>div {
     flex: 1 1 8%;
-    border-top: 1px solid #494351;
+    border-top: 1px solid #a2a2a2;
     box-sizing: border-box;
   }
   .main-part .tbl-label {
@@ -214,12 +214,19 @@
     border-top: none;
     font-size: 1.2rem;
     color: #afafbf;
+    background: #dcdcdc;
   }
   .tbl-cell {
     display: inline-flex;
     flex-direction: column;
     text-align: center;
     justify-content: space-between;
+  }
+  .col-time .tbl-cell:nth-child(2) {
+    border-top: none;
+  }
+  .day-cell {
+    color: #fff;
   }
 
 </style>

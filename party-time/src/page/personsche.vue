@@ -228,9 +228,9 @@
           //     event.toggle = false
           //   })
           // })
-          if (res.body) {
-            this.responseData = res.body
-          }
+          // if (res.body) {
+          //   this.responseData = res.body
+          // }
           // for (let day in this.responseData) {
           //   if (this.responseData.hasOwnProperty(day)) {
           //     day = this.responseData[day]
@@ -356,7 +356,7 @@
   }
   .col-time .tbl-cell {
     flex: 1 1 8%;
-    border-top: 1px solid #494351;
+    border-top: 1px solid #a2a2a2;
     box-sizing: border-box;
   }
 
@@ -368,7 +368,7 @@
     flex: 0 1 3rem;
     border-top: none;
     font-size: 1.2rem;
-    color: #000;
+    color: #afafbf;
     background: #dcdcdc;
     height: 3rem;
     text-align: center;
