@@ -8,7 +8,7 @@
       <mt-field label="群名称"  v-model="groupName" class="group-name"></mt-field>
       <mt-field label="群简介" type="textarea" v-model="groupDetail" class="group-detail" rows="4"></mt-field>
     </section>
-      <section class="add-people-block">
+      <section class="add-people-block" hidden>
         <div class="add-people" @click="navigator">
           <img src="../img/search.png" class="search"/>
           <span>从搜索中添加</span>
@@ -33,7 +33,7 @@
     },
     methods: {
       create () {
-        this.$http.post('groupagenda/group/create/', {'group name': this.groupName, 'description': this.groupDetail}).then(res => {
+        this.$http.post('group-agenda/group/create/', {'group name': this.groupName, 'description': this.groupDetail}).then(res => {
           if (res.body.name) {
             this.Toast('你已经创建群组' + res.body.name)
           }
@@ -42,12 +42,12 @@
       }
     },
     mounted () {
-      this.groupName = localStorage.groupName || ''
-      this.groupDetail = localStorage.groupDetail || ''
-      this.addPerson = localStorage.addList || []
-      localStorage.removeItem('groupName')
-      localStorage.removeItem('groupDetail')
-      localStorage.removeItem('addList')
+      // this.groupName = localStorage.groupName || ''
+      // this.groupDetail = localStorage.groupDetail || ''
+      // this.addPerson = localStorage.addList || []
+      // localStorage.removeItem('groupName')
+      // localStorage.removeItem('groupDetail')
+      // localStorage.removeItem('addList')
     }
   }
 </script>

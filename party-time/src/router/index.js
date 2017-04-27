@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Hello from '@/components/Hello'
 import sche from '@/page/sche'
 import login from '@/page/login'
 import person from '@/page/person'
@@ -20,9 +19,8 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
-      name: 'Hello',
-      component: Hello
+      path: '',
+      redirect: 'sche'
     },
     {
       path: '/sche',
@@ -77,6 +75,5 @@ export default new Router({
       path: '/addperson',
       component: addperson
     }
-
   ]
 })
