@@ -1,0 +1,34 @@
+[class*=iconm--] {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  font-style: normal;
+  color: #fff;
+  text-align: left;
+  text-indent: -9999px;
+  direction: ltr;
+  box-sizing: border-box;
+}
+
+.iconm--plus {
+  width: 3rem;
+  height: 3rem;
+  margin: 0.2rem;
+}
+.iconm--plus::before, .iconm--plus::after                                                                                        {
+  content: ' ';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: inset 0 0 0 32px;
+  pointer-events: none;
+}
+.iconm--plus::before {
+  width: 2rem;
+  height: 0.2rem;
+}
+.iconm--plus::after {
+  height: 2rem;
+  width: 0.2rem;
+}

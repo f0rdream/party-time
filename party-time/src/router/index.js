@@ -2,12 +2,22 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import Hello from '@/components/Hello'
-import home from '@/page/home'
-import group from '@/page/group/index'
+import sche from '@/page/sche'
+import login from '@/page/login'
+import person from '@/page/person'
+import register from '@/page/register'
+import addsche from '@/page/addsche'
+import creategroupsche from '@/page/creategroupsche'
+import creategroup from '@/page/creategroup'
+import mygroup from '@/page/mygroup'
+import groupmessage from '@/page/groupmessage'
+import personsche from '@/page/personsche'
+import addperson from '@/page/addperson'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -15,14 +25,58 @@ export default new Router({
       component: Hello
     },
     {
-      path: '/group',
-      name: 'group',
-      component: group
+      path: '/sche',
+      name: 'sche',
+      component: sche
     },
     {
-      path: '/home',
-      name: 'home',
-      component: home
+      path: '/login',
+      name: 'login',
+      component: login
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: register
+    },
+    {
+      path: '/person',
+      name: 'person',
+      component: person
+    },
+    {
+      path: '/personsche',
+      name: 'personsche',
+      component: personsche
+    },
+    {
+      path: '/addsche',
+      name: 'addsche',
+      component: addsche
+    },
+    {
+      path: '/creategroup',
+      name: 'creategroup',
+      component: creategroup
+    },
+    {
+      path: '/creategroupsche',
+      name: 'creategroupsche',
+      component: creategroupsche
+    },
+    {
+      path: '/mygroup',
+      name: 'mygroup',
+      component: mygroup
+    },
+    {
+      path: '/groupmessage',
+      component: groupmessage
+    },
+    {
+      path: '/addperson',
+      component: addperson
     }
+
   ]
 })

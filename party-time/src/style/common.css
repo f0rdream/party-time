@@ -1,11 +1,30 @@
 html, body {
   margin: 0;
   padding: 0;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif, 'PingFang SC', 'Noto Sans CJK', 'Microsoft YaHei';
+  height: 100%;
+}
+html {
+  font-size: 62.5%;
+  width:100%;
+  height:100%;
+  background: rgb(232,232,232);
+}
+body {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.app-wrapper {
+  height: 100%;
+}
 
+a {
+  background-color: transparent;
+  text-decoration: none;
+}
+.mint-header{
+  background: rgb(255,35,61);
+}
 
 .clear::after {
   content: "";
@@ -17,4 +36,33 @@ html, body {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/*From Wang Yang*/
+.btn-large {
+  box-sizing: border-box;
+  height: 4rem;
+  width: 24rem;
+  border-radius:4rem;
+  border : 2px solid rgb(255,35,61);
+  background: rgb(232,232,232);
+  color: rgb(255,35,61);
+  display: block;
+  margin: 20px auto 0 auto;
+}
+
+
+.middle-box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.button-section{
+  background: rgb(232,232,232);
+}
+.mint-tab-container-wrap {
+margin-top:1rem;
+}
+.mint-tab-container{
+  background: rgb(232,232,232) ;
 }
