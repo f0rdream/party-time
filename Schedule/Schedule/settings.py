@@ -46,7 +46,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -155,15 +154,3 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
     )
 }
-
-
-
-# To add CORS support
-CORS_ORIGIN_WHITELIST = (
-    'google.com',
-    'localhost:8000',
-    '127.0.0.1:9000',
-    'nodeapp:2333'
-)
-
-CORS_ALLOW_CREDENTIALS = True
