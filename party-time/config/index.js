@@ -49,6 +49,10 @@ module.exports = {
       'http://localhost:8000/group-agenda/**': {
         target: 'http://localhost:' + mockPort,
         changeOrigin: true
+      },
+      'http://localhost:8000/media/**': {
+        target: 'http://localhost:' + mockPort,
+        changeOrigin: true
       }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"

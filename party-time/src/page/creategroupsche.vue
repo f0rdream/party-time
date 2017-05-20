@@ -50,22 +50,21 @@
     },
     methods: {
       submit () {
-        this.affair.start_time = this.pickerstart.getFullYear() + '-' + ((this.pickerstart.getMonth() + 1) < 10 ? '0' +
-            (this.pickerstart.getMonth() + 1) : (this.pickerstart.getMonth() + 1)) +
-          '-' + (this.pickerstart.getDate() < 10 ? '0' + this.pickerstart.getDate() : this.pickerstart.getDate()) + 'T' +
-          (this.pickerstart.getHours() < 10 ? '0' + this.pickerstart.getHours() : this.pickerstart.getHours()) + ':' +
-          (this.pickerstart.getMinutes() < 10 ? '0' + this.pickerstart.getMinutes() : this.pickerstart.getMinutes()) + ':00Z'
+        this.affair.start_time = this.pickerstart.getFullYear() + '-' + ((this.pickerstart.getMonth() + 1) < 10 ? '0' + (this.pickerstart.getMonth() + 1) : (this.pickerstart.getMonth() + 1)) + '-' + (this.pickerstart.getDate() < 10 ? '0' + this.pickerstart.getDate() : this.pickerstart.getDate()) + 'T' + (this.pickerstart.getHours() < 10 ? '0' + this.pickerstart.getHours() : this.pickerstart.getHours()) + ':' + (this.pickerstart.getMinutes() < 10 ? '0' + this.pickerstart.getMinutes() : this.pickerstart.getMinutes())
         this.affair.end_time = this.pickerend.getFullYear() + '-' + ((this.pickerend.getMonth() + 1) < 10 ? '0' +
             (this.pickerend.getMonth() + 1) : (this.pickerend.getMonth() + 1)) +
           '-' + (this.pickerend.getDate() < 10 ? '0' + this.pickerend.getDate() : this.pickerend.getDate()) + 'T' +
           (this.pickerend.getHours() < 10 ? '0' + this.pickerend.getHours() : this.pickerend.getHours()) + ':' +
-          (this.pickerend.getMinutes() < 10 ? '0' + this.pickerend.getMinutes() : this.pickerend.getMinutes()) + ':00Z'
-        this.$http.post('group-agenda/' + this.group_id + '/post2', this.affair, {headers: {
+          (this.pickerend.getMinutes() < 10 ? '0' + this.pickerend.getMinutes() : this.pickerend.getMinutes())
+        console.log(localStorage.csrftoken)
+        this.$http.post('group-agenda/' + this.group_id + '/post2/', this.affair, {headers: {
           'X-CSRFToken': localStorage.csrftoken
         }}).then(res => {
           if (res.body.title) {
             Toast('你已经创建任务' + res.title)
           }
+        }, res => {
+          Toast('创建任务失败')
         })
       },
       showPickerStart () {
@@ -95,9 +94,10 @@
           '-' + (this.pickerend.getDate() < 10 ? '0' + this.pickerend.getDate() : this.pickerend.getDate()) + '-' +
           (this.pickerend.getHours() < 10 ? '0' + this.pickerend.getHours() : this.pickerend.getHours()) + '-' +
           (this.pickerend.getMinutes() < 10 ? '0' + this.pickerend.getMinutes() : this.pickerend.getMinutes())
-      },
-      group_id: function () {
       }
+    },
+    mounted () {
+      this.group_id = localStorage.group_id
     }
   }
 </script>

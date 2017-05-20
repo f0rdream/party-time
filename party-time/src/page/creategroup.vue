@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import {Toast} from 'mint-ui'
   export default {
     data () {
       return {
@@ -33,13 +34,25 @@
     },
     methods: {
       create () {
-        this.$http.post('group-agenda/group/create/', {'name': this.groupName, 'group_profile': this.groupDetail}, {headers: {
+        let post = {'name': this.groupName, 'group_profile': {'description': this.groupDetail, 'picture': null}}
+        console.log(this.groupName)
+        console.log(this.groupDetail)
+        this.$http.post('/group-agenda/group/create/', post, {headers: {
           'X-CSRFToken': localStorage.csrftoken
         }}).then(res => {
           if (res.body.name) {
-            this.Toast('你已经创建群组' + res.body.name)
+            Toast({
+              message: '创建成功',
+              position: 'bottom',
+              duration: 2000
+            })
           }
         }, res => {
+          Toast({
+            message: '创建失败',
+            position: 'bottom',
+            duration: 2000
+          })
         })
       }
     },

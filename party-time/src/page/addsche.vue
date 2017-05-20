@@ -14,9 +14,12 @@
             <section>
             <mt-field label="系统账号" placeholder="请输入系统账号" v-model="student.user_stu_id"></mt-field>
             <mt-field label="登录密码" placeholder="请输入登录密码" v-model="student.user_stu_pwd"></mt-field>
+            <mt-field label="验证码" placeholder="请输入登录密码" v-model="student.yzm_text"></mt-field>
+            <img v-bind:src="yzm_url" class="yzm">
             </section>
             <section class="button-section">
-            <mt-button type="default" class="btn-large" click.native="login">登录</mt-button>
+            <mt-button type="default" class="btn-large" @click.native="getYZM">得到验证码</mt-button>
+            <mt-button type="default" class="btn-large" @click.native="login">登录</mt-button>
             </section>
           </mt-tab-container-item>
           <mt-tab-container-item id="2">
@@ -58,6 +61,7 @@
   export default {
     data () {
       return {
+        yzm_url: '',
         pickerstart: new Date(),
         pickerend: new Date(),
         selected: '1',
@@ -69,7 +73,7 @@
         },
         student: {
           yzm_cookie: '',
-          yzm_url: '',
+          yzm_text: '',
           user_stu_id: '',
           user_stu_pwd: ''
         }
@@ -87,26 +91,28 @@
           '-' + (this.pickerend.getDate() < 10 ? '0' + this.pickerend.getDate() : this.pickerend.getDate()) + 'T' +
           (this.pickerend.getHours() < 10 ? '0' + this.pickerend.getHours() : this.pickerend.getHours()) + ':' +
           (this.pickerend.getMinutes() < 10 ? '0' + this.pickerend.getMinutes() : this.pickerend.getMinutes()) + ':00Z'
-        this.$http.post('tasks/create', this.affair, {headers: {
+        this.$http.post('tasks/create/', this.affair, {headers: {
           'X-CSRFToken': localStorage.csrftoken
         }}).then(res => {
           if (res.body.title) {
             Toast('你已经创建任务' + res.body.title)
           }
+        }, res => {
+          Toast('创建失败' + res.body.title)
         })
       },
       login () {
-        this.$http.get('/courses/yzm').then(res => {
-          if (res.body.yzm_cookie) {
-            this.student.yzm_cookie = res.body.yzm_cookie
-          }
-          if (res.body.yzm_url) {
-            this.student.yzm_url = res.body.yzm_url
-          }
-        })
-        this.$http.post('/courses/', this.student).then(res => {
+        this.$http.post('/courses/', this.student, {headers: {
+          'X-CSRFToken': localStorage.csrftoken
+        }}).then(res => {
           if (res.ok) {
             this.$router.push('personsche')
+          } else {
+            Toast({
+              message: '登陆失败',
+              position: 'bottom',
+              duration: 2000
+            })
           }
         }, res => {
           Toast({
@@ -114,6 +120,17 @@
             position: 'bottom',
             duration: 2000
           })
+        })
+      },
+      getYZM () {
+        this.$http.get('/courses/yzm').then(res => {
+          if (res.body.yzm_cookie) {
+            console.log(res.body)
+            this.student.yzm_cookie = res.body.yzm_cookie
+          }
+          if (res.body.yzm_url) {
+            this.yzm_url = res.body.yzm_url
+          }
         })
       },
       showPickerStart () {
@@ -161,6 +178,9 @@
 }
 .main-part {
   background: rgb(232,232,232)
+}
+.yzm{
+  margin-top:20px;
 }
 
 

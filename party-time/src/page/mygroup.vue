@@ -27,7 +27,6 @@
     },
     data () {
       return {
-        groupId: [],
         groups: [{id: '001', picture: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1493043744598&di=830b5dfaa6b0d3106c8d6064587c0a76&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%.jpg', name: 'lala', description: 'this is lala'}]
       }
     },
@@ -37,28 +36,29 @@
         this.$router.push('creategroup')
       },
       choose: function (groupId) {
+        console.log(groupId)
         localStorage.group_id = groupId
         this.$router.push('sche')
       }
     },
     mounted () {
-      this.$http.get('group-agenda/group/').then(res => {
+      var that = this
+      this.$http.get('/group-agenda/group/').then(res => {
+        console.log(res.body)
         res.body.forEach(function (val, index) {
-          this.groupId.push(val.id)
+          that.$http.get('/group-agenda/' + val.id + '/group-profile/').then(res => {
+            var group = {}
+            var id = val.id
+            group.id = id
+            group.name = res.body.group
+            group.description = res.body.description.substring(0, 18)
+            group.picture = res.body.picture
+            console.log(group)
+            that.groups.push(group)
+          })
         })
       })
-      for (let groupId in groupId) {
-        this.$http.get('/group-agenda/' + groupId + '/group-profile/').then(res => {
-          let group
-          group.id = groupId
-          group.name = res.body.group
-          group.descirption = res.body.description.substring(0, 18)
-          group.picture = res.body.picture
-          this.groups.push(group)
-        })
-      }
     }
-
   }
 </script>
 <style scoped>
